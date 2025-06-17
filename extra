@@ -1,0 +1,457 @@
+// // import * as React from 'react';
+// // import AppBar from '@mui/material/AppBar';
+// // import Box from '@mui/material/Box';
+// // import Toolbar from '@mui/material/Toolbar';
+// // import IconButton from '@mui/material/IconButton';
+// // import Typography from '@mui/material/Typography';
+// // import Menu from '@mui/material/Menu';
+// // import MenuIcon from '@mui/icons-material/Menu';
+// // import Container from '@mui/material/Container';
+// // import Avatar from '@mui/material/Avatar';
+// // import Button from '@mui/material/Button';
+// // import Tooltip from '@mui/material/Tooltip';
+// // import MenuItem from '@mui/material/MenuItem';
+// // import AdbIcon from '@mui/icons-material/Adb';
+// // import {useState} from 'react';
+
+// // const pages = ['Products', 'Pricing', 'Blog'];
+// // const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+// // function Navbar() {
+// //     const [anchorElNav, setAnchorElNav] = useState(null);
+// //     const [anchorElUser, setAnchorElUser] = useState(null);
+
+// //     const handleOpenNavMenu = (event) => {
+// //         setAnchorElNav(event.currentTarget);
+// //     };
+// //     const handleOpenUserMenu = (event) => {
+// //         setAnchorElUser(event.currentTarget);
+// //     };
+
+// //     const handleCloseNavMenu = () => {
+// //         setAnchorElNav(null);
+// //     };
+
+// //     const handleCloseUserMenu = () => {
+// //         setAnchorElUser(null);
+// //     };
+
+// //     return (
+// //         <AppBar position="static" sx={{marginTop:3}}>
+// //             <Container maxWidth="xl">
+// //                 <Toolbar disableGutters>
+// //                     {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+// //                     <Typography
+// //                         variant="h6"
+// //                         noWrap
+// //                         component="a"
+// //                         href="/"
+// //                         sx={{
+// //                             mr: 2,
+// //                             display: { xs: 'none', md: 'flex' },
+// //                             fontFamily: 'monospace',
+// //                             fontWeight: 700,
+// //                             letterSpacing: '.3rem',
+// //                             color: 'inherit',
+// //                             textDecoration: 'none',
+// //                         }}
+// //                     >
+// //                         LOGO
+// //                     </Typography>
+
+// //                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+// //                         <IconButton
+// //                             size="large"
+// //                             aria-label="account of current user"
+// //                             aria-controls="menu-appbar"
+// //                             aria-haspopup="true"
+// //                             onClick={handleOpenNavMenu}
+// //                             color="inherit"
+// //                         >
+// //                             <MenuIcon />
+// //                         </IconButton>
+// //                         <Menu
+// //                             id="menu-appbar"
+// //                             anchorEl={anchorElNav}
+// //                             anchorOrigin={{
+// //                                 vertical: 'bottom',
+// //                                 horizontal: 'left',
+// //                             }}
+// //                             keepMounted
+// //                             transformOrigin={{
+// //                                 vertical: 'top',
+// //                                 horizontal: 'left',
+// //                             }}
+// //                             open={Boolean(anchorElNav)}
+// //                             onClose={handleCloseNavMenu}
+// //                             sx={{ display: { xs: 'block', md: 'none' } }}
+// //                         >
+// //                             {pages.map((page) => (
+// //                                 <MenuItem key={page} onClick={handleCloseNavMenu}>
+// //                                     <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
+// //                                 </MenuItem>
+// //                             ))}
+// //                         </Menu>
+// //                     </Box>
+// //                     <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+// //                     <Typography
+// //                         variant="h5"
+// //                         noWrap
+// //                         component="a"
+// //                         href="#app-bar-with-responsive-menu"
+// //                         sx={{
+// //                             mr: 2,
+// //                             display: { xs: 'flex', md: 'none' },
+// //                             flexGrow: 1,
+// //                             fontFamily: 'monospace',
+// //                             fontWeight: 700,
+// //                             letterSpacing: '.3rem',
+// //                             color: 'inherit',
+// //                             textDecoration: 'none',
+// //                         }}
+// //                     >
+// //                         LOGO
+// //                     </Typography>
+// //                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+// //                         {pages.map((page) => (
+// //                             <Button
+// //                                 key={page}
+// //                                 onClick={handleCloseNavMenu}
+// //                                 sx={{ my: 2, color: 'white', display: 'block' }}
+// //                             >
+// //                                 {page}
+// //                             </Button>
+// //                         ))}
+// //                     </Box>
+// //                     <Box sx={{ flexGrow: 0 }}>
+// //                         <Tooltip title="Open settings">
+// //                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+// //                                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+// //                             </IconButton>
+// //                         </Tooltip>
+// //                         <Menu
+// //                             sx={{ mt: '45px' }}
+// //                             id="menu-appbar"
+// //                             anchorEl={anchorElUser}
+// //                             anchorOrigin={{
+// //                                 vertical: 'top',
+// //                                 horizontal: 'right',
+// //                             }}
+// //                             keepMounted
+// //                             transformOrigin={{
+// //                                 vertical: 'top',
+// //                                 horizontal: 'right',
+// //                             }}
+// //                             open={Boolean(anchorElUser)}
+// //                             onClose={handleCloseUserMenu}
+// //                         >
+// //                             {settings.map((setting) => (
+// //                                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
+// //                                     <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
+// //                                 </MenuItem>
+// //                             ))}
+// //                         </Menu>
+// //                     </Box>
+// //                 </Toolbar>
+// //             </Container>
+// //         </AppBar>
+// //     );
+// // }
+// // export default Navbar;
+
+
+// import React from 'react'
+
+// const Navbar = () => {
+//     return (
+//         <div>
+//             <header className="header">
+//                 <nav>
+//                     <div className="container nav-container pd-titan-header">
+//                         <div className="top-navbar">
+//                             <div className="logo">
+//                                 <a href="#" className="display-lg-none">
+//                                     <div className="custom-img">
+//                                         <button className="navbar-toggler pl-0" type="button" aria-controls="sg-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+//                                             <img src="/on/demandware.static/Sites-Titan-Site/-/default/dwce889118/images/hamburger.svg" height="22px" alt="image" className="default-img pl-0" style={{ opacity: 1 }} />
+//                                         </button>
+//                                     </div>
+//                                 </a>
+//                                 <a href="/homepage?lang=en_IN">
+//                                     <div className="custom-img titan-logo">
+
+
+//                                         <div className="content-asset">
+//                                             <img alt="Titan Logo" src="https://www.titan.co.in/on/demandware.static/-/Library-Sites-TitanSharedLibrary/default/dwb6d5816b/images/homepage/titan-logo.svg" fetchpriority="high" title="" />
+//                                         </div>
+
+
+
+//                                     </div>
+//                                 </a>
+//                             </div>
+//                             <div className="search-bar-top d-none display-lg">
+//                                 <section id="search" className="t-search-header">
+//                                     <div className="site-search">
+//                                         <form data-isedited="false" role="search" action="/search?lang=en_IN" method="get" name="simpleSearch" className="Search-Form">
+//                                             <div className="input-groups">
+//                                                 <button type="reset" name="reset-button" className=" reset-button d-none d-md-none" aria-label="Clear search keywords"><svg id="Component_593_1" data-name="Component 593 – 1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+//                                                     <line id="Line_145" data-name="Line 145" x2="14.25" transform="translate(5.625 12)" fill="none" stroke="#832729" stroke-width="1"></line>
+//                                                     <rect id="Rectangle_9948" data-name="Rectangle 9948" width="24" height="24" fill="none"></rect>
+//                                                     <path id="Path_1438" data-name="Path 1438" d="M13.627,7,6.87,13.75l6.75,6.75" transform="translate(-1.717 -1.75)" fill="none" stroke="#832729" stroke-width="1"></path>
+//                                                 </svg></button>
+//                                                 <div className="search-bar-container">
+//                                                     <input className="form-control search-field" type="text" name="q" value="" data-m-placeholder="Search" placeholder="Search" role="combobox" aria-describedby="search-assistive-text" aria-haspopup="listbox" aria-owns="search-results" aria-expanded="false" aria-autocomplete="list" aria-activedescendant="" maxlength="100" aria-controls="search-results" aria-label="Enter Keyword or Item No." autocomplete="off" />
+//                                                     <button type="submit" name="search-button" className="search-icon d-md-block" aria-label="Submit search keywords">
+//                                                         <img src="/on/demandware.static/Sites-Titan-Site/-/default/dw9921a253/images/search.svg" height="25px" alt="image" className="default-img icons-search p-0" /></button>
+//                                                     <div className="voice-search">
+//                                                         <div className="pulse">
+//                                                         </div>
+//                                                         <img src="/on/demandware.static/Sites-Titan-Site/-/default/dw359619cf/images/mic-icon.svg" alt="image" className="default-img icons-search" />
+//                                                     </div>
+//                                                     <div className="btn-close search-field-clear-button">
+//                                                         <img src="/on/demandware.static/Sites-Titan-Site/-/default/dw59bb0913/images/close-icon.png" className="clear-text" height="10" alt="clear search input" />
+//                                                     </div>
+
+//                                                     <div className="search-suggestions">
+
+//                                                         <ul className="d-none" role="listbox" id="search-results">
+
+
+//                                                             <li className="items">
+//                                                                 titan
+//                                                             </li>
+
+//                                                             <li className="items">
+//                                                                 automatic
+//                                                             </li>
+
+//                                                             <li className="items">
+//                                                                 for women
+//                                                             </li>
+
+//                                                             <li className="items">
+//                                                                 octane
+//                                                             </li>
+
+//                                                             <li className="items">
+//                                                                 cocktails
+//                                                             </li>
+
+//                                                             <li className="items">
+//                                                                 golden watch for men
+//                                                             </li>
+
+//                                                             <li className="items">
+//                                                                 police watches for men
+//                                                             </li>
+
+//                                                             <li className="items">
+//                                                                 stellar
+//                                                             </li>
+
+//                                                             <li className="items">
+//                                                                 titan edge
+//                                                             </li>
+
+//                                                             <li className="items">
+//                                                                 tommy hilfiger men
+//                                                             </li>
+
+
+//                                                         </ul>
+//                                                         <span className="search-phrase">
+//                                                             stel</span>
+//                                                     </div>
+//                                                 </div>
+//                                                 <div className="suggestions-wrapper" data-url="/on/demandware.store/Sites-Titan-Site/en_IN/SearchServices-GetSuggestions?q="></div>
+//                                                 <input type="hidden" value="en_IN" name="lang" />
+//                                             </div>
+//                                         </form>
+//                                     </div>
+//                                 </section>
+//                             </div>
+//                             <div className="top-navbar-right">
+//                                 <div className="desktop-account-icon">
+//                                     <div className="menu account">
+
+
+
+//                                         <a className="px-0 login-mobile d-xl-none" href="javascript:void(0)">
+//                                             <div className="custom-img account-username">
+//                                                 <img src="/on/demandware.static/Sites-Titan-Site/-/default/dw4ec3656e/images/headerAccount.svg" alt="image" className="default-img " />
+//                                                 <span className="d-none user-name-logo text-center m-0"></span>
+//                                             </div>
+//                                             <span className="d-none display-lg" data-name="Account">Account</span>
+//                                         </a>
+//                                         <a className="px-0 login-menu d-none d-xl-block" href="javascript:void(0)">
+//                                             <div className="custom-img account-username">
+//                                                 <img src="/on/demandware.static/Sites-Titan-Site/-/default/dw4ec3656e/images/headerAccount.svg" alt="image" className="default-img " />
+//                                                 <span className="d-none user-name-logo text-center m-0"></span>
+//                                             </div>
+//                                             <span className="d-none display-lg" data-name="Account">Account</span>
+//                                         </a>
+
+
+
+//                                         <div className="content-asset">
+//                                             <div className="account-pop text-left tw-login-section ">
+//                                                 <div className="account-header text-capitalize tw-login-heading">Welcome!</div>
+//                                                 <div className="m-0 access-acount-text tw-login-personal-text">Enjoy A Personalized Timekeeping Experience.</div>
+//                                                 <div className="account-pop-cta d-flex align-items-center">
+//                                                     <div className="signuplogin" id="common-button">
+//                                                         <button className="btn tw-btn-primary false custom-btn popupDisplayed tw-new-signlogin-button" id="loginButton" data-toggle="modal" data-target="#loginModal" data-modal-name="Signup"> <a href="javascript:void(0)">
+//                                                             <span className="text-btn text-uppercase tw-login-signup-text">LOGIN/SIGNUP</span>
+//                                                         </a>
+//                                                         </button>
+//                                                     </div>
+//                                                 </div>
+//                                                 <ul>
+//                                                     <li><a className="whishlist-login" href="https://www.titan.co.in/myaccount?lang=en_IN" data-url-name="Wishlist">Wishlist</a>
+//                                                     </li>
+//                                                     <li><a href="https://www.titan.co.in/product/give-the-gift-of-convenience-with-a-titan-e-gift-card-for-stylish-accessories-shopping-eGCWOT.html?lang=en_IN">eGift Cards</a>
+//                                                     </li>
+//                                                     <li><a href="https://www.titan.co.in/store-locator?lang=en_IN">Find A Store</a>
+//                                                     </li>
+//                                                     <li><a href="https://www.titan.co.in/help-faqs.html?lang=en_IN">Help &amp; Contact</a>
+//                                                     </li>
+//                                                     <li><a href="https://www.titan.co.in/content/delivery-information.html?lang=en_IN">FAQ</a>
+//                                                     </li>
+//                                                 </ul>
+//                                             </div>
+//                                         </div>
+//                                     </div>
+
+//                                 </div>
+//                                 <div className="menu wishlist-nav-icon">
+//                                     <a className="px-0 whishlist-login" data-url-name="Wishlist" href="https://www.titan.co.in/myaccount?lang=en_IN#Wishlist">
+//                                         <div className="custom-img">
+//                                             <img src="/on/demandware.static/Sites-Titan-Site/-/default/dw74bb4003/images/headerWishlist.png" height="24px" alt="image" className="default-img" />
+//                                         </div>
+//                                         <span className="d-none display-lg" data-name="Wishlist">Wishlist
+//                                         </span>
+//                                         <span className="wishlist-dot position-absolute"></span>
+//                                     </a>
+//                                 </div>
+//                                 <div className="menu cart-icon">
+//                                     <a className="px-0" href="/checkout/cart?lang=en_IN">
+//                                         <div className="custom-img">
+//                                             <img src="/on/demandware.static/Sites-Titan-Site/-/default/dwc7d12cb0/images/headerCart.svg" alt="image" className="default-img" />
+//                                         </div>
+//                                         <span className="d-none display-lg" data-name="Cart">Cart</span>
+//                                         <div className="cart-count minicart-quantity d-none">
+//                                             0
+//                                         </div>
+//                                     </a>
+//                                     <div className="d-none reminderModalData" data-reminder-shown="false" data-basket-status="false" data-domestic="true"></div>
+//                                     <input type="hidden" className="minicartMsg" value="Added to Cart" />
+//                                     <input type="hidden" className="wishlistQty" value="0.0" />
+//                                     <div id="mobileMiniCartPopup" className="tw-minicart-popup d-none"></div>
+
+//                                     <input type="hidden" className="international-redirection-data" value="{}" />
+//                                 </div>
+//                                 <div className="menu pb-header track-order-btn d-none d-xl-block popUPDisplayed" data-url="/on/demandware.store/Sites-Titan-Site/en_IN/Order-TrackGuestOrder" data-modal-name="Track-Order">
+//                                     <a className="px-0 track-order" href="javascript:void(0)">
+//                                         <div className="custom-img">
+//                                             <img src="/on/demandware.static/Sites-Titan-Site/-/default/dw817abde2/images/icon-track-order-desktop.svg" alt="order track" className="default-img stores-logo" />
+//                                         </div>
+//                                         <span className="d-none display-lg" data-name="Track Order">Track Order</span>
+//                                     </a>
+//                                 </div>
+//                                 <div className="cross-icon d-none">
+//                                     <img src="/on/demandware.static/Sites-Titan-Site/-/default/dw59bb0913/images/close-icon.png" height="25px" alt="image" className="default-img pl-0" style={{ opacity: 1 }} />
+//                                 </div>
+//                             </div>
+
+//                         </div>
+//                         <div className="search-bar display-lg-none pd-header-search">
+//                             <section id="search" className="t-search-header">
+//                                 <div className="site-search">
+//                                     <form data-isedited="false" role="search" action="/search?lang=en_IN" method="get" name="simpleSearch" className="Search-Form">
+//                                         <div className="input-groups">
+//                                             <button type="reset" name="reset-button" className=" reset-button d-none d-md-none" aria-label="Clear search keywords"><svg id="Component_593_1" data-name="Component 593 – 1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+//                                                 <line id="Line_145" data-name="Line 145" x2="14.25" transform="translate(5.625 12)" fill="none" stroke="#832729" stroke-width="1"></line>
+//                                                 <rect id="Rectangle_9948" data-name="Rectangle 9948" width="24" height="24" fill="none"></rect>
+//                                                 <path id="Path_1438" data-name="Path 1438" d="M13.627,7,6.87,13.75l6.75,6.75" transform="translate(-1.717 -1.75)" fill="none" stroke="#832729" stroke-width="1"></path>
+//                                             </svg></button>
+//                                             <div className="search-bar-container">
+//                                                 <input className="form-control search-field" type="text" name="q" value="" data-m-placeholder="Search" placeholder="Search" role="combobox" aria-describedby="search-assistive-text" aria-haspopup="listbox" aria-owns="search-results" aria-expanded="false" aria-autocomplete="list" aria-activedescendant="" maxlength="100" aria-controls="search-results" aria-label="Enter Keyword or Item No." autocomplete="off" />
+//                                                 <button type="submit" name="search-button" className="search-icon d-md-block" aria-label="Submit search keywords">
+//                                                     <img src="/on/demandware.static/Sites-Titan-Site/-/default/dw9921a253/images/search.svg" height="25px" alt="image" className="default-img icons-search p-0" /></button>
+//                                                 <div className="voice-search">
+//                                                     <div className="pulse">
+//                                                     </div>
+//                                                     <img src="/on/demandware.static/Sites-Titan-Site/-/default/dw359619cf/images/mic-icon.svg" alt="image" className="default-img icons-search" />
+//                                                 </div>
+//                                                 <div className="btn-close search-field-clear-button">
+//                                                     <img src="/on/demandware.static/Sites-Titan-Site/-/default/dw59bb0913/images/close-icon.png" className="clear-text" height="10" alt="clear search input" />
+//                                                 </div>
+
+//                                                 <div className="search-suggestions">
+
+//                                                     <ul className="d-none" role="listbox" id="search-results">
+
+
+//                                                         <li className="items">
+//                                                             titan
+//                                                         </li>
+
+//                                                         <li className="items">
+//                                                             automatic
+//                                                         </li>
+
+//                                                         <li className="items">
+//                                                             for women
+//                                                         </li>
+
+//                                                         <li className="items">
+//                                                             octane
+//                                                         </li>
+
+//                                                         <li className="items">
+//                                                             cocktails
+//                                                         </li>
+
+//                                                         <li className="items">
+//                                                             golden watch for men
+//                                                         </li>
+
+//                                                         <li className="items">
+//                                                             police watches for men
+//                                                         </li>
+
+//                                                         <li className="items">
+//                                                             stellar
+//                                                         </li>
+
+//                                                         <li className="items">
+//                                                             titan edge
+//                                                         </li>
+
+//                                                         <li className="items">
+//                                                             tommy hilfiger men
+//                                                         </li>
+
+
+//                                                     </ul>
+//                                                     <span className="search-phrase">
+//                                                         stel</span>
+//                                                 </div>
+//                                             </div>
+//                                             <div className="suggestions-wrapper" data-url="/on/demandware.store/Sites-Titan-Site/en_IN/SearchServices-GetSuggestions?q="></div>
+//                                             <input type="hidden" value="en_IN" name="lang" />
+//                                         </div>
+//                                     </form>
+//                                 </div>
+//                             </section>
+//                         </div>
+//                     </div>
+//                 </nav>
+//             </header>
+//         </div>
+//     )
+// }
+// export default Navbar;
+
+
+

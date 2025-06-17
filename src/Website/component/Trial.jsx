@@ -38,9 +38,13 @@ function Trial() {
                 Custom Styled Button
             </ThemedButton>
 
-            <button onClick={makeButtonsRound}>
+            <ThemedButton onClick={makeButtonsRound}>
                 Make Buttons Round
-            </button>
+            </ThemedButton>
+            <ThemedButton onClick={makeButtonsRound}>
+               Theme
+            </ThemedButton>
+
         </div>
     );
 }

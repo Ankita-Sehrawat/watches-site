@@ -36,3 +36,11 @@ body.dark {
     right: 20px;
     z-index: 1000;
 }
+
+.css-zjhuaj-MuiGrid-root {
+    justify-content: center !important;
+}
+
+.css-mwb7rv-MuiGrid-root {
+    justify-content: center !important;
+}
