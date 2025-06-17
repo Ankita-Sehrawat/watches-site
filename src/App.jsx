@@ -1,15 +1,51 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
+import PharmaAdminLogin from './pharma-admin/component/PharmaAdminLogin'
+import ProtectedRoute from './pharma-admin/component/ProtectedRoute'
+import PharmaAdmin from './pharma-admin/component/PharmaAdmin'
+import PharmaBanner from './pharma-admin/page/PharmaBanner'
+import PharmaDashboard from './pharma-admin/page/PharmaDashboard'
+import PharmaCategory from './pharma-admin/page/PharmaCategory'
+import PharmaSubCategory from './pharma-admin/page/PharmaSubCategory'
+import PharmaOrder from './pharma-admin/page/PharmaOrder'
+import PharmaProducts from './pharma-admin/page/PharmaProducts'
+import AddNewProduct from './pharma-admin/page/AddNewProduct'
+import PharmaUser from './pharma-admin/page/PharmaUser'
+import PharmaSetting from './pharma-admin/page/PharmaSetting'
+import PharmaWholeSale from './pharma-admin/page/PharmaWholeSale'
+import PharmaPrescription from './pharma-admin/page/PharmaPrescription'
+import { ThemeSelector, useTheme } from './ThemeContext'
+import { useEffect } from 'react';
+import Navbar from './Website/component/Navbar'
+import Landing from './Website/page/landing'
+import Trial from './Website/component/Trial'
+import Cards from './Website/component/Cards'
+
 
 function App() {
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = (e) => setTheme(e.matches ? 'dark' : 'light');
+    mediaQuery.addListener(handleChange);
+    return () => mediaQuery.removeListener(handleChange);
+  }, []);
+
+
 
   return (
-    <>
+    <div >
+      <ThemeSelector />
+      {/* <h1>current theme : {theme}</h1> */}
       <Routes>
-        <Route>
-          <Route path="/admin-login" element={<PharmaAdminLogin />} />
+        <Route path='/' element={<Landing />} />
+        <Route path='nav' element={<Navbar />} />
+        <Route path='trial' element={<Trial />} />
+        <Route path='cards' element={<Cards />} />
 
-          <Route
+        <Route>
+          {/* <Route path="/admin-login" element={<PharmaAdminLogin />} /> */}
+
+          {/* <Route
             path="/pharma-admin"
             element={
               <ProtectedRoute>
@@ -27,13 +63,12 @@ function App() {
             <Route path="banner" element={<PharmaBanner />} />
             <Route path="user" element={<PharmaUser />} />
             <Route path="settings" element={<PharmaSetting />} />
-            <Route path="chart" element={<MyChart />} />
             <Route path="wholesale" element={<PharmaWholeSale />} />
             <Route path="prescriptions" element={<PharmaPrescription />} />
-          </Route>
+          </Route> */}
         </Route>
       </Routes>
-    </>
+    </div>
   )
 }
 

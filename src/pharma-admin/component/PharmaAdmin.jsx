@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PharmaSidebar from '../component/PharmaSidebar';
+import PharmaSidebar from './PharmaSidebar';
 import { Outlet } from 'react-router-dom';
 import { Menu } from 'lucide-react';
 import '../pharma.css';

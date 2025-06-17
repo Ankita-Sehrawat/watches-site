@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axiosInstance from '../../../components/AxiosInstance';
-import API_URL from '../../../config';
+
+
 import {
   Box,
   Button,

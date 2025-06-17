@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react'
-import axiosInstance from '../../../components/AxiosInstance';
 import { toast } from 'react-toastify';
 import { useParams, useNavigate } from 'react-router-dom';
 
@@ -37,67 +36,6 @@ const AddNewProduct = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const fileInputRef = useRef(null);
 
-    useEffect(() => {
-        const init = async () => {
-            try {
-                const categoriesResponse = await axiosInstance.get('/user/allcategories');
-                setCategoryList(categoriesResponse.data);
-
-                if (isEditMode) {
-                    const productResponse = await axiosInstance.get(`/user/product/${id}`);
-                    const product = productResponse.data;
-                    // console.log('lksdjf;sdkjfl;skjfl;sjdf;', productResponse.data)
-
-                    // Fetch subcategories for selected category
-                    if (product.category) {
-                        const subCategoryResponse = await axiosInstance.get(
-                            `/user/allSubcategories?category=${encodeURIComponent(product.category)}`
-                        );
-                        setSubCategoryList(subCategoryResponse.data);
-                    }
-
-                    setFormData({
-                        ...product,
-                        expires_on: product.expires_on?.split('T')[0],
-                        media: product.media.map(m => ({
-                            ...m,
-                            url: m.url.startsWith('http') ? m.url : `${m.url}`,
-                            type: m.type.includes('video') ? 'video' : 'image',
-                            file: null
-                        }))
-                    });
-                }
-            } catch (error) {
-                console.error("Error during initialization:", error);
-            }
-        };
-
-        init();
-    }, [id]);
-
-
-    // const fetchProductDetails = async (productId) => {
-    //     try {
-    //         const res = await axiosInstance.get(`/user/product/${productId}`);
-    //         const product = res.data;
-
-    //         setFormData({
-    //             ...product,
-    //             expires_on: product.expires_on?.split('T')[0],
-    //             media: product.media.map(m => ({
-    //                 ...m,
-    //                 url: m.url.startsWith('http') ? m.url : `${m.url}`,
-    //                 type: m.type.includes('video') ? 'video' : 'image',
-    //                 file: null // existing media won't be re-uploaded
-    //             }))
-    //         });
-
-    //         fetchSubCategories(product.category);
-    //     } catch (error) {
-    //         console.error("Failed to load product:", error);
-    //     }
-    // };
-
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -107,7 +45,7 @@ const AddNewProduct = () => {
         }));
 
         if (name === "category") {
-            setFormData(prev => ({ ...prev, sub_category: "" })); // Reset subcategory
+            setFormData(prev => ({ ...prev, sub_category: "" }));
             fetchSubCategories(value);
         }
     };
@@ -157,206 +95,8 @@ const AddNewProduct = () => {
         fileInputRef.current.click();
     };
 
-    const validateForm = () => {
-        const newErrors = {};
-        const requiredFields = [
-            'name', 'description', 'retail_price', 'consumer_price',
-            'quantity', 'category', 'expires_on', 'dosage', 'productvariety'
-        ];
 
 
-        requiredFields.forEach(field => {
-            if (!formData[field]) {
-                newErrors[field] = `${field.replace('_', ' ')} is required`;
-            }
-        });
-
-        if (formData.expires_on && new Date(formData.expires_on) < new Date()) {
-            newErrors.expires_on = "Expiry date must be in the future";
-        }
-
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
-    };
-
-    // option 1 : sending data as json+formData
-
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     if (!validateForm()) return;
-
-    //     let productId = id;
-
-    //     try {
-    //         // Step 1: send all fields except media as JSON
-    //         const jsonPayload = { ...formData };
-    //         delete jsonPayload.media;
-
-    //         if (isEditMode) {
-    //             await axiosInstance.put(`/user/updateProduct/${id}`, jsonPayload);
-    //             toast.success('Product updated successfully!');
-    //         } else {
-    //             const res = await axiosInstance.post(`/user/createProduct`, jsonPayload);
-    //             productId = res.data._id || res.data.product?._id;
-    //             toast.success('Product added successfully!');
-    //         }
-
-    //         // Step 2: send only new media files (file is present)
-    //         const newMedia = formData.media.filter(m => m.file);
-    //         if (newMedia.length > 0) {
-    //             const uploadData = new FormData();
-    //             newMedia.forEach(media => {
-    //                 uploadData.append('media', media.file);
-    //             });
-
-    //             await axiosInstance.post(`/user/uploadProductMedia/${productId}`, uploadData, {
-    //                 headers: { 'Content-Type': 'multipart/form-data' }
-    //             });
-
-    //             toast.success('Media uploaded successfully!');
-    //         }
-
-    //         navigate("/pharma-admin/products");
-
-    //     } catch (error) {
-    //         toast.error('Something went wrong. Please try again.');
-    //         console.error('Submit Error:', error);
-    //     }
-    // };
-
-
-    // option 2 : sending data as FormData+json
-
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     if (!validateForm()) return;
-
-    //     let productId = id;
-
-    //     try {
-    //         // Step 1: Prepare JSON payload (exclude media)
-    //         const { media, ...jsonPayload } = formData;
-
-    //         if (isEditMode) {
-    //             await axiosInstance.put(`/user/updateProduct/${productId}`, jsonPayload);
-    //             toast.success('Product updated successfully!');
-    //         } else {
-    //             const res = await axiosInstance.post(`/user/createProduct`, jsonPayload);
-    //             productId = res.data._id || res.data.product?._id;
-    //             toast.success('Product added successfully!');
-    //         }
-
-    //         // Step 2: Always send media separately via FormData if any exists
-    //         if (media?.length > 0) {
-    //             const uploadData = new FormData();
-    //             media.forEach(item => {
-    //                 if (item?.file) {
-    //                     uploadData.append('media', item.file);
-    //                 }
-    //             });
-
-    //             if ([...uploadData].length > 0) {
-    //                 await axiosInstance.post(`/user/createProduct/${productId}`, uploadData, {
-    //                     headers: { 'Content-Type': 'multipart/form-data' }
-    //                 });
-
-    //                 toast.success('Media uploaded successfully!');
-    //             }
-    //         }
-
-    //         navigate("/pharma-admin/products");
-
-    //     } catch (error) {
-    //         toast.error('Something went wrong. Please try again.');
-    //         console.error('Submit Error:', error);
-    //     }
-    // };
-
-
-    // option 3 : sending data as FormData
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (!validateForm()) return;
-
-        try {
-            const formPayload = new FormData();
-
-            // Append all fields (excluding media for now)
-            Object.entries(formData).forEach(([key, value]) => {
-                if (key === 'media') return;
-                if (value !== null && value !== undefined) {
-                    formPayload.append(key, value);
-                }
-            });
-
-            // Append media files (only new uploads with .file property)
-            formData.media.forEach((item) => {
-                if (item?.file) {
-                    formPayload.append('media', item.file);
-                } else {
-                    // Optionally append existing media URLs if needed
-                    formPayload.append('existingMedia', item.url);
-                }
-            });
-
-            let res;
-            if (isEditMode) {
-                res = await axiosInstance.put(
-                    `/user/updateProduct/${id}`,
-                    formPayload,
-                    {
-                        headers: {
-                            'Content-Type': 'multipart/form-data',
-                        },
-                    }
-                );
-                toast.success('Product updated successfully!');
-            } else {
-                res = await axiosInstance.post(
-                    '/user/createProduct',
-                    formPayload,
-                    {
-                        headers: {
-                            'Content-Type': 'multipart/form-data',
-                        },
-                    }
-                );
-                toast.success('Product added successfully!');
-            }
-
-            navigate('/pharma-admin/products');
-        } catch (error) {
-            console.error('Submit Error:', error);
-            toast.error('Something went wrong. Please try again.', error);
-        }
-    };
-
-
-    const handleReset = () => {
-        setFormData({
-            name: "",
-            description: "",
-            media: [],
-            retail_price: "",
-            consumer_price: "",
-            discount: "",
-            mrp: "",
-            quantity: "",
-            category: "",
-            sub_category: "",
-            productvariety: "",
-            expires_on: "",
-            suitable_for: "",
-            benefits: "",
-            dosage: "",
-            side_effects: "",
-            prescription: "",
-            created_at: new Date().toISOString(),
-            deleted_at: null
-        });
-        setErrors({});
-        setIsSubmitted(false);
-    };
 
     const formatFileSize = (bytes) => {
         if (bytes < 1024) return bytes + ' bytes';
@@ -364,26 +104,6 @@ const AddNewProduct = () => {
         else return (bytes / 1048576).toFixed(2) + ' MB';
     };
 
-    const fetchSubCategories = async (category) => {
-        try {
-            const response = await axiosInstance.get(`/user/allSubcategories?category=${encodeURIComponent(category)}`);
-            console.log("Fetched subCategories:", response.data);
-            setSubCategoryList(response.data);
-        } catch (error) {
-            console.error("Error fetching subcategories:", error);
-        }
-    };
-
-
-    const fetchData = async () => {
-        try {
-            const response = await axiosInstance.get('/user/allcategories');
-            console.log("Fetched categories:", response.data);
-            setCategoryList(response.data);
-        } catch (error) {
-            console.error("Error fetching categories:", error);
-        }
-    };
 
     return (
         <div>

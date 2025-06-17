@@ -8,11 +8,15 @@ import {
     Settings,
     X
 } from 'lucide-react';
-import '../../../components/Admin/Admin.css';
+import { useTheme } from '../../ThemeContext';
+
 
 const PharmaSidebar = ({ onClose }) => {
+
     return (
-        <div className="admin-sidebar">
+        <div className={`admin-sidebar some-component ${theme}`}>
+            Current theme: {theme}
+            <button onClick={toggleTheme}>Toggle Theme</button>
             <div className="sidebar-content">
                 {/* Close Button for Mobile */}
                 <div className="sidebar-header-mobile">

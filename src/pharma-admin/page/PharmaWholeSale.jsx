@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import axiosInstance from '../../../components/AxiosInstance';
+
 import { toast } from 'react-toastify';
-import CustomLoader from '../../../components/CustomLoader';
+import CustomLoader from '../../components/CustomLoader';
 import {
   Box,
   Button,

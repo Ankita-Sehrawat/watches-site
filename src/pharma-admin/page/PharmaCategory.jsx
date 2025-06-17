@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axiosInstance from '../../../components/AxiosInstance';
-import API_URL from '../../../config';
+
+
 import {
     Box,
     Button,
@@ -107,14 +107,6 @@ const PharmaCategory = () => {
         formData.append('description', newCategory.description);
         formData.append('image', newCategory.image);
 
-        try {
-            await axiosInstance.post('/user/createCategory', formData);
-            fetchData();
-            handleCloseModal();
-        } catch (error) {
-            console.error("Error creating category:", error);
-            alert("Error creating category.");
-        }
     };
 
     const handleUpdateCategory = async () => {
@@ -127,39 +119,6 @@ const PharmaCategory = () => {
             formData.append('image', newCategory.image);
         }
 
-        try {
-            await axiosInstance.put(`/user/updateCategory/${editingCategoryId}`, formData);
-            fetchData();
-            handleCloseModal();
-        } catch (error) {
-            console.error("Error updating category:", error.response?.data || error.message);
-            alert("Failed to update category: " + (error.response?.data?.message || error.message));
-        }
-    };
-
-    const handleDeleteCategory = async (id) => {
-        if (!window.confirm("Are you sure you want to delete this category?")) return;
-
-        try {
-            await axiosInstance.delete(`/user/deleteCategory/${id}`);
-            fetchData();
-        } catch (error) {
-            console.error("Error deleting category:", error.response?.data || error.message);
-            alert("Failed to delete category: " + (error.response?.data?.message || error.message));
-        }
-    };
-
-    const startEditingCategory = (cat) => {
-        setIsEditing(true);
-        setEditingCategoryId(cat._id);
-        setNewCategory({
-            variety: cat.variety || '',
-            name: cat.name || '',
-            description: cat.description || '',
-            image: null,
-        });
-        setImagePreview(cat.image ? `${API_URL}/${cat.image}` : null);
-        setOpenModal(true);
     };
 
     const handleOpenModal = () => {
@@ -186,19 +145,6 @@ const PharmaCategory = () => {
         setImagePreview(null);
     };
 
-    const fetchData = async () => {
-        try {
-            const response = await axiosInstance.get('/user/allcategories');
-            setCategoryList(response.data);
-        } catch (error) {
-            console.error("Error fetching categories:", error);
-        }
-        setLoading(false);
-    };
-
-    useEffect(() => {
-        fetchData();
-    }, []);
 
     return (
         <Container maxWidth="lg">
@@ -247,8 +193,7 @@ const PharmaCategory = () => {
                                         <TableCell>{cat.description}</TableCell>
                                         <TableCell>
                                             <Avatar
-                                                src={`${API_URL}/${cat.image}`}
-                                                alt={cat.name}
+                                                src=''
                                                 sx={{ width: 56, height: 56 }}
                                                 variant="rounded"
                                             />
@@ -264,14 +209,14 @@ const PharmaCategory = () => {
                                         <TableCell>
                                             <IconButton
                                                 color="primary"
-                                                onClick={() => startEditingCategory(cat)}
+                                               
                                                 disabled={!!cat.deleted_at}
                                             >
                                                 <Edit />
                                             </IconButton>
                                             <IconButton
                                                 color="error"
-                                                onClick={() => handleDeleteCategory(cat._id)}
+                                               
                                                 disabled={!!cat.deleted_at}
                                             >
                                                 <Delete />
@@ -380,7 +325,7 @@ const PharmaCategory = () => {
                         Cancel
                     </Button>
                     <Button
-                        onClick={handleSubmit}
+                        // onClick={handleSubmit}
                         color="primary"
                         variant="contained"
                     >

@@ -1,6 +1,6 @@
 // import React, { useEffect, useState } from 'react';
-// import axiosInstance from '../../../components/AxiosInstance';
-// import API_URL from '../../../config';
+// 
+// 
 // import {
 //     Box,
 //     Typography,
@@ -208,8 +208,8 @@
 
 
 import React, { useEffect, useState } from 'react';
-import axiosInstance from '../../../components/AxiosInstance';
-import API_URL from '../../../config';
+
+
 import {
     Box,
     Typography,

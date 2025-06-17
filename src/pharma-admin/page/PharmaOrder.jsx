@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axiosInstance from '../../../components/AxiosInstance';
+
 import {
   Box,
   Container,
@@ -57,24 +57,6 @@ const PharmaOrder = () => {
   const [loading, setLoading] = useState(true);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axiosInstance.get('/api/orders');
-        setOrders(response.data.orders);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-      setLoading(false);
-    };
-    fetchData();
-  }, []);
-
-  const handleViewOrder = (order) => {
-    setSelectedOrder(order);
-    setOpenDialog(true);
-  };
 
   const handleCloseDialog = () => {
     setOpenDialog(false);
