@@ -68,7 +68,7 @@ const Collection = () => {
                 Collection
             </Typography>
             <Box sx={{ my: 4 }}>
-                <Grid container spacing={2}>
+                <Grid container spacing={2} sx={{ justifyContent: 'center'  }}>
                     {collections.map((collection, index) => (
                         <Grid item xs={6} sm={3}  key={index} sx={{ justifyContent: 'center'  }}>
                             <Link href={collection.link} underline="none">

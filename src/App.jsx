@@ -77,36 +77,20 @@
 
 
 import { Route, Routes } from 'react-router-dom';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import { useEffect, useState } from 'react';
+import { CssBaseline } from '@mui/material';
 import Landing from './Website/page/landing';
+import { ThemeSelector } from './ThemeContext';
 
 function App() {
-  const [themeMode, setThemeMode] = useState('light');
-  
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = (e) => setThemeMode(e.matches ? 'dark' : 'light');
-    mediaQuery.addListener(handleChange);
-    return () => mediaQuery.removeListener(handleChange);
-  }, []);
-
-  const theme = createTheme({
-    palette: {
-      mode: themeMode,
-    },
-  });
-
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
+    <>
+      {/* <ThemeSelector /> */}
+      <CssBaseline /> {/* This helps with baseline styles */}
       <Routes>
         <Route path='/' element={<Landing />} />
-      
         {/* Other routes */}
       </Routes>
-    </ThemeProvider>
+    </>
   );
 }
 

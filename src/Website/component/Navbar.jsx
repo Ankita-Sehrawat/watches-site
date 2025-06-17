@@ -42,7 +42,7 @@ import {
   ChildFriendly,
   Diamond
 } from '@mui/icons-material';
-import { useTheme } from '../../ThemeContext';
+import { ThemeSelector, useTheme } from '../../ThemeContext';
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -277,9 +277,6 @@ const Navbar = () => {
               >
                 Track Order
               </Button> */}
-
-              {/* theme */}
-              <Button onClick={toggleThemeMode}>Toggle Theme</Button>
               
               {/* Mobile Search Toggle */}
               <IconButton
@@ -291,6 +288,7 @@ const Navbar = () => {
               >
                 <SearchIcon />
               </IconButton>
+               <ThemeSelector />
             </Box>
           </Toolbar>
           

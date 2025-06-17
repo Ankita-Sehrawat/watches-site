@@ -1,42 +1,18 @@
-import { Button, createTheme, ThemeProvider as MuiThemeProvider, styled } from '@mui/material';
+import { Button, createTheme, ThemeProvider as MuiThemeProvider, CssBaseline } from '@mui/material';
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 // Create Theme Context
 const ThemeContext = createContext();
 
-// Styled Button Component
-const StyledButton = styled(Button, {
-  shouldForwardProp: (prop) => prop !== 'customTheme',
-})(({ customTheme, variant, theme }) => ({
-  color: customTheme?.color || 'inherit',
-  backgroundColor: customTheme?.backgroundColor ||
-    (variant === 'contained' ? theme.palette.primary.main : 'transparent'),
-  padding: customTheme?.padding || '8px 16px',
-  margin: customTheme?.margin || '0',
-  borderRadius: customTheme?.borderRadius || '4px',
-  transition: 'all 0.3s ease',
-  '&:hover': {
-    color: customTheme?.hoverColor || customTheme?.color || 'inherit',
-    backgroundColor: customTheme?.hoverBackground ||
-      (variant === 'contained' ? theme.palette.primary.dark : theme.palette.action.hover),
-  },
-}));
-
 export const ThemeProvider = ({ children }) => {
   const [themeMode, setThemeMode] = useState(() => {
-    const savedTheme = typeof window !== 'undefined' ? localStorage.getItem('theme') : null;
-    return savedTheme || 'light';
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') || 'light';
+    }
+    return 'light';
   });
 
-  const [buttonTheme, setButtonTheme] = useState({
-    primaryColor: '#1976d2',
-    secondaryColor: '#dc004e',
-    padding: '8px 16px',
-    borderRadius: '4px',
-    hoverEffect: true
-  });
-
-  // Apply theme class to body
+  // Apply theme class to body and save to localStorage
   useEffect(() => {
     document.body.className = themeMode;
     localStorage.setItem('theme', themeMode);
@@ -46,19 +22,15 @@ export const ThemeProvider = ({ children }) => {
     setThemeMode(prev => prev === 'light' ? 'dark' : 'light');
   };
 
-  const updateButtonTheme = (newTheme) => {
-    setButtonTheme(prev => ({ ...prev, ...newTheme }));
-  };
-
   // Create MUI theme
   const muiTheme = createTheme({
     palette: {
       mode: themeMode,
       primary: {
-        main: buttonTheme.primaryColor,
+        main: '#1976d2',
       },
       secondary: {
-        main: buttonTheme.secondaryColor,
+        main: '#dc004e',
       },
       background: {
         default: themeMode === 'light' ? '#ffffff' : '#121212',
@@ -68,49 +40,12 @@ export const ThemeProvider = ({ children }) => {
         primary: themeMode === 'light' ? '#333333' : '#f5f5f5',
       },
     },
-    components: {
-      MuiButton: {
-        styleOverrides: {
-          root: {
-            padding: buttonTheme.padding,
-            borderRadius: buttonTheme.borderRadius,
-            transition: 'all 0.3s ease',
-            '&:hover': {
-              transform: buttonTheme.hoverEffect ? 'translateY(-2px)' : 'none',
-              boxShadow: buttonTheme.hoverEffect ? '0 4px 8px rgba(0,0,0,0.1)' : 'none',
-            },
-          },
-        },
-      },
-    },
   });
 
-  // Custom Button Component
-  const ThemedButton = ({ children, customTheme = {}, ...props }) => {
-    return (
-      <StyledButton 
-        customTheme={customTheme} 
-        {...props}
-        sx={{
-          px: 3,
-          py: 1,
-          ...props.sx
-        }}
-      >
-        {children}
-      </StyledButton>
-    );
-  };
-
   return (
-    <ThemeContext.Provider value={{ 
-      themeMode, 
-      toggleThemeMode, 
-      buttonTheme, 
-      updateButtonTheme,
-      ThemedButton
-    }}>
+    <ThemeContext.Provider value={{ themeMode, toggleThemeMode }}>
       <MuiThemeProvider theme={muiTheme}>
+        <CssBaseline /> {/* This helps apply the theme to the whole app */}
         {children}
       </MuiThemeProvider>
     </ThemeContext.Provider>
@@ -125,14 +60,14 @@ export const ThemeSelector = () => {
   const { themeMode, toggleThemeMode } = useTheme();
 
   return (
-    <div className="theme-selector">
+    <div className="theme-selector" style={{ position: 'fixed', top: 20, right: 50, zIndex: 1000 }}>
       <Button 
         onClick={toggleThemeMode} 
         variant="contained" 
         color="primary"
         aria-label="Toggle theme"
       >
-        {themeMode === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode'}
+        {themeMode === 'light' ? '🌙' : '☀️'}
       </Button>
     </div>
   );
