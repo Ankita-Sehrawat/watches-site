@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { 
+import {
   AppBar,
   Toolbar,
   Container,
@@ -50,7 +50,7 @@ const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openCategories, setOpenCategories] = useState({});
-  
+
   const categories = [
     {
       name: 'Men',
@@ -82,15 +82,15 @@ const Navbar = () => {
   const handleAccountMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  
+
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
-  
+
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
-  
+
   const toggleMobileSearch = () => {
     setMobileSearchOpen(!mobileSearchOpen);
   };
@@ -101,17 +101,19 @@ const Navbar = () => {
 
   const handleCategoryToggle = (categoryName) => {
     setOpenCategories(prev => ({
-      ...prev,
-      [categoryName]: !prev[categoryName]
+      ...Object.keys(prev).reduce((acc, key) => {
+        acc[key] = false; // Close all other categories
+        return acc;
+      }, {}),
+      [categoryName]: !prev[categoryName] // Toggle the clicked category
     }));
   };
 
-  const { themeMode, toggleThemeMode } = useTheme();
-    // const { theme, toggleTheme } = useTheme();
+  const { themeMode } = useTheme();
 
   return (
     <div className={`some-component ${themeMode}`}>
-      <AppBar position="static" color="default" elevation={0} sx={{ bgcolor: 'white' }}>
+      <AppBar position="static" color="default" elevation={0} sx={{ bgcolor: 'background.paper' }}>
         {/* Top Bar */}
         <Container maxWidth="xl" disableGutters>
           <Toolbar sx={{ justifyContent: 'space-between', py: 1 }}>
@@ -127,19 +129,19 @@ const Navbar = () => {
               >
                 <MenuIcon />
               </IconButton>
-              
+
               <Box component="a" href="/" sx={{ display: 'flex', mr: 2 }}>
-                <img 
-                  src="https://www.titan.co.in/on/demandware.static/-/Library-Sites-TitanSharedLibrary/default/dwb6d5816b/images/homepage/titan-logo.svg" 
-                  alt="Titan Logo" 
+                <img
+                  src="https://www.titan.co.in/on/demandware.static/-/Library-Sites-TitanSharedLibrary/default/dwb6d5816b/images/homepage/titan-logo.svg"
+                  alt="Titan Logo"
                   height="40"
                 />
               </Box>
             </Box>
-            
+
             {/* Middle - Search (desktop) */}
-            <Box sx={{ 
-              flexGrow: 1, 
+            <Box sx={{
+              flexGrow: 1,
               display: { xs: 'none', md: 'flex' },
               maxWidth: 600,
               mx: 2
@@ -172,7 +174,7 @@ const Navbar = () => {
                 </IconButton>
               </Paper>
             </Box>
-            
+
             {/* Right side - Icons */}
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               {/* Account */}
@@ -187,7 +189,7 @@ const Navbar = () => {
                 >
                   <AccountIcon />
                 </IconButton>
-                
+
                 <Popover
                   id="account-menu"
                   open={Boolean(anchorEl)}
@@ -210,10 +212,10 @@ const Navbar = () => {
                     <Typography variant="body2" sx={{ mb: 2 }}>
                       Enjoy A Personalized Timekeeping Experience.
                     </Typography>
-                    <Button 
-                      variant="contained" 
+                    <Button
+                      variant="contained"
                       fullWidth
-                      sx={{ 
+                      sx={{
                         bgcolor: '#832729',
                         '&:hover': { bgcolor: '#6a1f21' },
                         mb: 2
@@ -221,7 +223,7 @@ const Navbar = () => {
                     >
                       LOGIN/SIGNUP
                     </Button>
-                    
+
                     <List>
                       <ListItem button>
                         <ListItemText primary="Wishlist" />
@@ -242,7 +244,7 @@ const Navbar = () => {
                   </Box>
                 </Popover>
               </Box>
-              
+
               {/* Wishlist */}
               <IconButton
                 size="large"
@@ -254,7 +256,7 @@ const Navbar = () => {
                   <WishlistIcon />
                 </Badge>
               </IconButton>
-              
+
               {/* Cart */}
               <IconButton
                 size="large"
@@ -265,19 +267,7 @@ const Navbar = () => {
                   <CartIcon />
                 </Badge>
               </IconButton>
-              
-              {/* Track Order (desktop) */}
-              {/* <Button
-                startIcon={<StoreIcon />}
-                sx={{ 
-                  display: { xs: 'none', lg: 'flex' },
-                  color: 'inherit',
-                  textTransform: 'none'
-                }}
-              >
-                Track Order
-              </Button> */}
-              
+
               {/* Mobile Search Toggle */}
               <IconButton
                 size="large"
@@ -288,21 +278,21 @@ const Navbar = () => {
               >
                 <SearchIcon />
               </IconButton>
-               <ThemeSelector />
+              <ThemeSelector />
             </Box>
           </Toolbar>
-          
+
           {/* Desktop Categories Bar */}
-          <Box sx={{ 
+          <Box sx={{
             display: { xs: 'none', md: 'flex' },
-            bgcolor: '#f5f5f5',
+            bgcolor: 'background.default',
             px: 2,
             py: 1
           }}>
             {categories.map((category) => (
               <Box key={category.name} sx={{ position: 'relative', mr: 3 }}>
                 <Button
-                  endIcon={<ExpandMore />}
+                  endIcon={openCategories[category.name] ? <ExpandLess /> : <ExpandMore />}
                   sx={{
                     color: 'text.primary',
                     textTransform: 'none',
@@ -310,14 +300,13 @@ const Navbar = () => {
                       bgcolor: 'transparent'
                     }
                   }}
-                  onMouseEnter={() => handleCategoryToggle(category.name)}
-                  onMouseLeave={() => handleCategoryToggle(category.name)}
+                  onClick={() => handleCategoryToggle(category.name)}
                 >
                   {category.name}
                 </Button>
-                <Collapse 
-                  in={openCategories[category.name]} 
-                  timeout="auto" 
+                <Collapse
+                  in={openCategories[category.name]}
+                  timeout="auto"
                   unmountOnExit
                   sx={{
                     position: 'absolute',
@@ -340,10 +329,10 @@ const Navbar = () => {
               </Box>
             ))}
           </Box>
-          
+
           {/* Mobile Search */}
           {mobileSearchOpen && (
-            <Box sx={{ 
+            <Box sx={{
               p: 2,
               display: { xs: 'flex', md: 'none' },
               bgcolor: 'background.paper'
@@ -371,9 +360,9 @@ const Navbar = () => {
                   <MicIcon />
                 </IconButton>
                 <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-                <IconButton 
+                <IconButton
                   color="inherit"
-                  sx={{ p: '10px' }} 
+                  sx={{ p: '10px' }}
                   onClick={toggleMobileSearch}
                 >
                   <CloseIcon />
@@ -403,8 +392,8 @@ const Navbar = () => {
           <List>
             {categories.map((category) => (
               <React.Fragment key={category.name}>
-                <ListItem 
-                  button 
+                <ListItem
+                  button
                   onClick={() => handleCategoryToggle(category.name)}
                 >
                   <ListItemIcon>
