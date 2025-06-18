@@ -80,6 +80,7 @@ import { Route, Routes } from 'react-router-dom';
 import { CssBaseline } from '@mui/material';
 import Landing from './Website/page/landing';
 import { ThemeSelector } from './ThemeContext';
+import Products from './Website/component/Products';
 
 function App() {
   return (
@@ -88,7 +89,8 @@ function App() {
       <CssBaseline /> {/* This helps with baseline styles */}
       <Routes>
         <Route path='/' element={<Landing />} />
-        {/* Other routes */}
+        <Route path='/products' element={<Products />} />
+       <Route  />
       </Routes>
     </>
   );

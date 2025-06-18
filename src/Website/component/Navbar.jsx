@@ -71,11 +71,6 @@ const Navbar = () => {
       name: 'Kids',
       icon: <ChildFriendly />,
       subCategories: ['Watches', 'Accessories']
-    },
-    {
-      name: 'Premium',
-      icon: <Diamond />,
-      subCategories: ['Titan Edge', 'Titan Mechanical', 'Titan Automatic']
     }
   ];
 
@@ -320,7 +315,7 @@ const Navbar = () => {
                     <List>
                       {category.subCategories.map((subCategory) => (
                         <ListItem button key={subCategory}>
-                          <ListItemText primary={subCategory} />
+                          <ListItemText primary={subCategory} sx={{ cursor: 'pointer' }} />
                         </ListItem>
                       ))}
                     </List>

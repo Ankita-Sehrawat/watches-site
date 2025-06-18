@@ -24,7 +24,7 @@ const HeroSection = () => {
       name: "Titan Sale",
       desktopImage: "https://www.titan.co.in/dw/image/v2/BKDD_PRD/on/demandware.static/-/Library-Sites-TitanSharedLibrary/default/dw42732bc9/images/homepage/All_Banners/MainSale_June2025_D.jpg",
       mobileImage: "https://www.titan.co.in/dw/image/v2/BKDD_PRD/on/demandware.static/-/Library-Sites-TitanSharedLibrary/default/dw49cf781a/images/homepage/All_Banners/MainSale_June2025_M.jpg",
-      link: "https://www.titan.co.in/shop/titan-sale?lang=en_IN"
+      link: "/products"
     },
     {
       name: "Father's Day",
