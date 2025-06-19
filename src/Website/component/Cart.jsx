@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Container,
     Grid,
@@ -40,6 +40,7 @@ import {
     LocalShipping,
     CardGiftcard
 } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
     const cartItems = [
@@ -75,11 +76,11 @@ const Cart = () => {
         }
     ];
 
-    const [selectedItems, setSelectedItems] = React.useState([cartItems[0].id]);
-    const [quantity, setQuantity] = React.useState(1);
-    const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
-    const [openOfferDialog, setOpenOfferDialog] = React.useState(false);
-    const [currentOffer, setCurrentOffer] = React.useState(null);
+    const [selectedItems, setSelectedItems] = useState([cartItems[0].id]);
+    const [quantity, setQuantity] = useState(1);
+    const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+    const [openOfferDialog, setOpenOfferDialog] = useState(false);
+    const [currentOffer, setCurrentOffer] = useState(null);
 
     const handleSelectItem = (itemId) => {
         if (selectedItems.includes(itemId)) {
@@ -117,10 +118,19 @@ const Cart = () => {
     };
 
     return (
-        <Container maxWidth="lg" sx={{ py: 4 }}>
-            <Grid container spacing={4}>
+        <Container maxWidth="xl" sx={{ py: 4 }}>
+            <Box sx={{
+                display: 'flex',
+                p: 2,
+                gap: 2,
+                width: '100%',
+                alignItems: 'flex-start'
+            }}>
                 {/* Left Column - Cart Items */}
-                <Grid item xs={12} md={8}>
+                <Box sx={{
+                    flex: 2,
+                    minWidth: 0
+                }}>
                     {/* Cart Header */}
                     <Paper sx={{ p: 2, mb: 3 }}>
                         <Box display="flex" justifyContent="space-between" alignItems="center">
@@ -150,30 +160,54 @@ const Cart = () => {
                     {/* Cart Items */}
                     {cartItems.map(item => (
                         <Paper key={item.id} sx={{ mb: 3 }}>
-                            <Grid container spacing={2} sx={{ p: 2 }}>
-                                <Grid item xs={12} sm={3} md={2}>
+                            <Box sx={{
+                                display: 'flex',
+                                p: 2,
+                                gap: 2,
+                                width: '100%',
+                                alignItems: 'flex-start'
+                            }}>
+                                {/* Image Section - Fixed width */}
+                                <Box sx={{
+                                    position: 'relative',
+                                    flexShrink: 0,
+                                    width: { xs: '30%', sm: '25%' },
+                                }}>
                                     <Checkbox
                                         checked={selectedItems.includes(item.id)}
                                         onChange={() => handleSelectItem(item.id)}
-                                        sx={{ position: 'absolute', zIndex: 1 }}
-                                    />
-                                    <Box
-                                        component="img"
-                                        src={item.image}
-                                        alt={item.name}
                                         sx={{
-                                            width: '100%',
-                                            height: 'auto',
-                                            maxHeight: 120,
-                                            objectFit: 'contain'
+                                            position: 'absolute',
+                                            zIndex: 1,
+                                            top: -8,
+                                            left: -8,
+                                            padding: 0
                                         }}
                                     />
-                                </Grid>
-                                <Grid item xs={12} sm={9} md={10}>
-                                    <Typography variant="body2" color="text.secondary">
+                                    <Link to={'/single_product'}>
+                                        <Box
+                                            component="img"
+                                            src={item.image}
+                                            alt={item.name}
+                                            sx={{
+                                                width: '100%',
+                                                height: 200,
+                                                objectFit: 'cover',
+                                                display: 'block'
+                                            }}
+                                        />
+                                    </Link>
+                                </Box>
+
+                                {/* Content Section - Flexible width */}
+                                <Box sx={{
+                                    flexGrow: 1,
+                                    minWidth: 0
+                                }}>
+                                    <Typography variant="body2" color="text.secondary" noWrap>
                                         {item.brand}
                                     </Typography>
-                                    <Typography variant="h6" sx={{ mb: 1 }}>
+                                    <Typography variant="h6" sx={{ mb: 1 }} >
                                         {item.name}
                                     </Typography>
 
@@ -224,18 +258,6 @@ const Cart = () => {
                                             Dispatch by {item.deliveryDate}
                                         </Typography>
                                     </Box>
-                                </Grid>
-                            </Grid>
-
-                            {/* Gift Options */}
-                            <Box sx={{ p: 2, borderTop: '1px solid rgba(0,0,0,0.12)' }}>
-                                <Box display="flex" alignItems="center" sx={{ mb: 1 }}>
-                                    <Checkbox />
-                                    <Typography variant="body2">Add Gift Wrap</Typography>
-                                </Box>
-                                <Box display="flex" alignItems="center">
-                                    <Checkbox />
-                                    <Typography variant="body2">Add Gift Message</Typography>
                                 </Box>
                             </Box>
                         </Paper>
@@ -269,10 +291,16 @@ const Cart = () => {
                             See More Offers
                         </Button>
                     </Paper>
-                </Grid>
+                </Box>
 
                 {/* Right Column - Order Summary */}
-                <Grid item xs={12} md={4}>
+                <Box sx={{
+                    flex: 1,
+                    position: { md: 'sticky' },
+                    top: { md: 20 },
+                    width: '100%',
+                    minWidth: 0
+                }}>
                     {/* Delivery Check */}
                     <Paper sx={{ p: 2, mb: 3 }}>
                         <Typography variant="h6" sx={{ mb: 2 }}>
@@ -346,8 +374,8 @@ const Cart = () => {
                             Your order is eligible for <span style={{ fontWeight: 'bold' }}>Free Shipping!</span>
                         </Typography>
                     </Paper>
-                </Grid>
-            </Grid>
+                </Box>
+            </Box>
 
             {/* Delete Confirmation Dialog */}
             <Dialog open={openDeleteDialog} onClose={() => setOpenDeleteDialog(false)}>

@@ -82,16 +82,19 @@ import Landing from './Website/page/landing';
 import Products from './Website/component/Products';
 import SingleProduct from './Website/component/SingleProduct';
 import Cart from './Website/component/Cart';
+import Checkout from './Website/component/Checkout';
 
 function App() {
   return (
     <>
-      <CssBaseline /> 
+      <CssBaseline />
       <Routes>
         <Route path='/' element={<Landing />} />
         <Route path='/products' element={<Products />} />
-        <Route path='/products/single_product' element={<SingleProduct />} />
+        {/* <Route path='/products/single_product' element={<SingleProduct />} /> */}
+        <Route path='/single_product' element={<SingleProduct />} />
         <Route path='/cart' element={<Cart />} />
+        <Route path='/checkout' element={<Checkout />} />
         <Route />
       </Routes>
     </>
