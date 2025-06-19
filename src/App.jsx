@@ -83,6 +83,7 @@ import Products from './Website/component/Products';
 import SingleProduct from './Website/component/SingleProduct';
 import Cart from './Website/component/Cart';
 import Checkout from './Website/component/Checkout';
+import Wishlist from './Website/component/Wishlist';
 
 function App() {
   return (
@@ -95,6 +96,7 @@ function App() {
         <Route path='/single_product' element={<SingleProduct />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/checkout' element={<Checkout />} />
+        <Route path='/wishlist' element={<Wishlist />} />
         <Route />
       </Routes>
     </>
