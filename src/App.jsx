@@ -81,15 +81,17 @@ import { CssBaseline } from '@mui/material';
 import Landing from './Website/page/landing';
 import Products from './Website/component/Products';
 import SingleProduct from './Website/component/SingleProduct';
+import Cart from './Website/component/Cart';
 
 function App() {
   return (
     <>
-      <CssBaseline /> {/* This helps with baseline styles */}
+      <CssBaseline /> 
       <Routes>
         <Route path='/' element={<Landing />} />
         <Route path='/products' element={<Products />} />
-        <Route path='/singleProduct' element={<SingleProduct />} />
+        <Route path='/products/single_product' element={<SingleProduct />} />
+        <Route path='/cart' element={<Cart />} />
         <Route />
       </Routes>
     </>

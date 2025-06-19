@@ -16,6 +16,7 @@ import {
     Favorite as FavoriteIcon,
     ShoppingCart
 } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
 
 const Products = () => {
     const products = [
@@ -153,13 +154,15 @@ const Products = () => {
                             )}
 
                             <Box sx={{ overflow: 'hidden', }}>
-                                <CardMedia
-                                    component="img"
-                                    height="190"
-                                    image={item.image}
-                                    alt={item.description}
-                                    sx={{ objectFit: 'cover', ":hover": { transform: 'scale(1.05)' } }}
-                                />
+                                <Link to='single_product'>
+                                    <CardMedia
+                                        component="img"
+                                        height="190"
+                                        image={item.image}
+                                        alt={item.description}
+                                        sx={{ objectFit: 'cover', ":hover": { transform: 'scale(1.05)' } }}
+                                    />
+                                </Link>
                             </Box>
 
                             <CardContent sx={{ textAlign: 'center', padding: 1 }}>

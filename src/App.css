@@ -12,7 +12,7 @@ body.light {
     --primary-color: #0066cc;
     background-color: var(--bg-color);
     color: var(--text-color);
-    /* box-shadow: 1px 2px 10px rgb(179, 174, 174); */
+    /* box-shadow: 1px 2px 10px rgb(152, 226, 33); */
 }
 
 /* Dark theme */
@@ -30,3 +30,6 @@ body.dark {
     right: 20px;
     z-index: 1000;
 }
+/* ::-webkit-scrollbar{
+    display: none;
+} */

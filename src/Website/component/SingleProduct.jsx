@@ -161,13 +161,17 @@ const SingleProduct = () => {
         }).format(price);
     };
 
+    const handleGoToCart = () => {
+        window.location.href = "/cart"
+    }
+
     return (
         <Container maxWidth="xl" sx={{ py: 4 }}>
 
-            <Grid container spacing={4} >
-                {/* Product Images - Left Half */}
-                <Grid item xs={12} md={5} sx={{ border: '1px solid red' }}>
-                    <Box sx={{ position: 'relative', width: '100%', height: '100%' }}>
+            <Grid container spacing={4}>
+                {/* Product Images */}
+                <Grid item xs={12} md={5}>
+                    <Box sx={{ position: 'relative', width: '100%' }}>
                         {/* Main Image */}
                         <Box sx={{
                             width: '100%',
@@ -248,10 +252,29 @@ const SingleProduct = () => {
                     </Box>
                 </Grid>
 
-                {/* Product Details - Right Half */}
-                <Grid item xs={12} md={7} sx={{ border: '1px solid red' }}>
+
+                {/* Product Details */}
+                <Grid item xs={12} md={7} sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: '58%',
+                    height: 600,
+                    overflow: 'auto',
+                    '&::-webkit-scrollbar': {
+                        width: '8px',
+                    },
+                    '&::-webkit-scrollbar-track': {
+                        background: '#f1f1f1',
+                        borderRadius: '10px',
+                    },
+                    '&::-webkit-scrollbar-thumb': {
+                        background: '#888',
+                        borderRadius: '10px',
+                    }
+                }
+                } >
                     {/* Brand and Tag */}
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2, maxWidth: '100%' }}>
+                    < Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
                         <Box sx={{ display: 'flex', alignItems: 'center' }}>
                             <Chip label={product.tag} color="primary" size="small" sx={{ mr: 1 }} />
                             <Typography variant="subtitle1" color="text.secondary">
@@ -267,7 +290,19 @@ const SingleProduct = () => {
                     </Box>
 
                     {/* Product Name */}
-                    <Typography variant="h4" component="h1" gutterBottom>
+                    <Typography
+                        variant="h4"
+                        component="h1"
+                        gutterBottom
+                    // sx={{
+                    //     wordWrap: 'break-word',
+                    //     overflow: 'hidden',
+                    //     textOverflow: 'ellipsis',
+                    //     display: '-webkit-box',
+                    //     WebkitLineClamp: 2,
+                    //     WebkitBoxOrient: 'vertical',
+                    // }}
+                    >
                         {product.name}
                     </Typography>
 
@@ -292,8 +327,9 @@ const SingleProduct = () => {
                             variant="contained"
                             color="primary"
                             size="large"
-                            startIcon={<ShoppingCartIcon />}
-                            sx={{ flex: 1 }}
+                            // startIcon={<ShoppingCartIcon />}
+                            sx={{ flex: 1, fontWeight: 800 }}
+                            onClick={handleGoToCart}
                         >
                             Add to Cart
                         </Button>
@@ -301,15 +337,15 @@ const SingleProduct = () => {
                             variant="outlined"
                             color="primary"
                             size="large"
-                            startIcon={<CompareArrowsIcon />}
-                            sx={{ flex: 1 }}
+                            // startIcon={<CompareArrowsIcon />}
+                            sx={{ flex: 1, fontWeight: 800 }}
                         >
-                            Compare
+                            Buy Now
                         </Button>
                     </Box>
 
                     {/* Secondary Actions */}
-                    <Box sx={{ display: 'flex', justifyContent: 'space-around', mb: 3,maxWidth: '100%' }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-around', mb: 3, maxWidth: '100%' }}>
                         <IconButton onClick={() => setWishlisted(!wishlisted)}>
                             {wishlisted ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}
                             <Typography variant="body2" sx={{ ml: 1 }}>
@@ -337,7 +373,7 @@ const SingleProduct = () => {
                     <Divider sx={{ my: 3 }} />
 
                     {/* Delivery Check */}
-                    <Paper sx={{ p: 2, mb: 3,maxWidth: '100%' }}>
+                    <Paper sx={{ p: 2, mb: 3, maxWidth: '100%' }}>
                         <Box sx={{ display: 'flex', alignItems: 'center' }}>
                             <Avatar src="/delivery-icon.png" sx={{ mr: 2 }} />
                             <Box sx={{ flexGrow: 1 }}>
@@ -435,6 +471,7 @@ const SingleProduct = () => {
                             <Typography>No reviews yet. Be the first to review this product!</Typography>
                         )}
                     </Box>
+
                 </Grid>
             </Grid>
 
@@ -462,7 +499,7 @@ const SingleProduct = () => {
                     <TextField
                         fullWidth
                         variant="outlined"
-                        value={`https://example.com/products/${product.id}`}
+                        // value={`https://example.com/products/${product.id}`}
                         InputProps={{
                             readOnly: true,
                         }}
@@ -530,7 +567,7 @@ const SingleProduct = () => {
                 </DialogActions>
             </Dialog>
 
-        </Container>
+        </Container >
     );
 };
 
