@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Grid,
     Card,
@@ -6,55 +6,101 @@ import {
     CardContent,
     Typography,
     IconButton,
-    Checkbox,
     Box,
     Button,
-    Tooltip,
-    Rating,
-    Divider
+    Container,
+    CardActions
 } from '@mui/material';
 import {
     FavoriteBorder as FavoriteBorderIcon,
     Favorite as FavoriteIcon,
-    Compare as CompareIcon,
-    ArrowForwardIos as ArrowForwardIosIcon,
-    ArrowBackIos as ArrowBackIosIcon
+    ShoppingCart
 } from '@mui/icons-material';
 
 const Products = () => {
-    const product = {
-        id: '90196am01_p',
-        name: 'Titan Zeal with 4.69 cm AMOLED Display with AOD, Functional Crown, BT Calling, Smartwatch with Black Mesh Strap',
-        brand: 'Titan',
-        category: 'Unisex Watch',
-        price: 9995,
-        originalPrice: 13995,
-        discount: 29,
-        rating: 4.0,
-        reviewCount: 42,
-        variantCount: 2,
-        images: [
-            'https://www.titan.co.in/dw/image/v2/BKDD_PRD/on/demandware.static/-/Sites-titan-master-catalog/default/dwda6ca9ea/images/Titan/Catalog/90196AM01_1.jpg?sw=360&sh=360',
-            'https://www.titan.co.in/dw/image/v2/BKDD_PRD/on/demandware.static/-/Sites-titan-master-catalog/default/dw1facc89c/images/Titan/Catalog/90196AM01_2.jpg?sw=360&sh=360',
-            'https://www.titan.co.in/dw/image/v2/BKDD_PRD/on/demandware.static/-/Sites-titan-master-catalog/default/dwfa84c927/images/Titan/Catalog/90196AM01_3.jpg?sw=360&sh=360',
-            'https://www.titan.co.in/dw/image/v2/BKDD_PRD/on/demandware.static/-/Sites-titan-master-catalog/default/dw3d395259/images/Titan/Catalog/90196AM01_4.jpg?sw=360&sh=360',
-            'https://www.titan.co.in/dw/image/v2/BKDD_PRD/on/demandware.static/-/Sites-titan-master-catalog/default/dwc62e7d9b/images/Titan/Catalog/90196AM01_5.jpg?sw=360&sh=360',
-            'https://www.titan.co.in/dw/image/v2/BKDD_PRD/on/demandware.static/-/Sites-titan-master-catalog/default/dwce22828e/images/Titan/Catalog/90196AM01_6.jpg?sw=360&sh=360',
-            'https://www.titan.co.in/dw/image/v2/BKDD_PRD/on/demandware.static/-/Sites-titan-master-catalog/default/dw275cf03c/images/Titan/Catalog/90196AM01_7.jpg?sw=360&sh=360'
-        ],
-        inStock: true
-    };
+    const products = [
+        {
+            id: 'p1',
+            brand: 'Police',
+            model: "Men's Watch",
+            description: "Police Quartz Analog Block Dial Blue...",
+            price: 19495,
+            image: "https://www.titan.co.in/dw/image/v2/BKDD_PRD/on/demandware.static/-/Sites-titan-master-catalog/default/dwfa84c927/images/Titan/Catalog/90196AM01_3.jpg?sw=360&sh=360"
+        },
+        {
+            id: 'p2',
+            brand: 'Kenneth Cole',
+            model: "Women's Watch",
+            description: "Kenneth Cole Quartz Analog Silver Dial...",
+            price: 19495,
+            image: "https://www.titan.co.in/dw/image/v2/BKDD_PRD/on/demandware.static/-/Sites-titan-master-catalog/default/dw275cf03c/images/Titan/Catalog/90196AM01_7.jpg?sw=360&sh=360"
+        },
+        {
+            id: 'p3',
+            brand: 'Kenneth Cole',
+            model: "Men's Watch",
+            description: "Kenneth Cole Quartz Multifunction...",
+            price: 20995,
+            image: "https://www.titan.co.in/dw/image/v2/BKDD_PRD/on/demandware.static/-/Sites-titan-master-catalog/default/dwc62e7d9b/images/Titan/Catalog/90196AM01_5.jpg?sw=360&sh=360"
+        },
+        {
+            id: 'p4',
+            brand: 'Fossil',
+            model: "Men's Watch",
+            description: "Fossil Chronograph Black Dial...",
+            price: 15995,
+            originalPrice: 19995,
+            discount: 20,
+            image: "https://www.titan.co.in/dw/image/v2/BKDD_PRD/on/demandware.static/-/Sites-titan-master-catalog/default/dwda6ca9ea/images/Titan/Catalog/90196AM01_1.jpg?sw=360&sh=360"
+        },
+        {
+            id: 'p5',
+            brand: 'Casio',
+            model: "Unisex Watch",
+            description: "Casio Digital Black Resin Strap...",
+            price: 4995,
+            originalPrice: 5995,
+            discount: 17,
+            image: "https://m.media-amazon.com/images/I/51Nk5SEBARL._AC_UL480_FMwebp_QL65_.jpg"
+        },
+        {
+            id: 'p6',
+            brand: 'Timex',
+            model: "Women's Watch",
+            description: "Timex Analog Rose Gold-Tone...",
+            price: 8995,
+            originalPrice: 10995,
+            discount: 18,
+            image: "https://www.titan.co.in/dw/image/v2/BKDD_PRD/on/demandware.static/-/Sites-titan-master-catalog/default/dw1facc89c/images/Titan/Catalog/90196AM01_2.jpg?sw=360&sh=360"
+        },
+        {
+            id: 'p3',
+            brand: 'Kenneth Cole',
+            model: "Men's Watch",
+            description: "Kenneth Cole Quartz Multifunction...",
+            price: 20995,
+            image: "https://www.titan.co.in/dw/image/v2/BKDD_PRD/on/demandware.static/-/Sites-titan-master-catalog/default/dwc62e7d9b/images/Titan/Catalog/90196AM01_5.jpg?sw=360&sh=360"
+        },
+        {
+            id: 'p6',
+            brand: 'Timex',
+            model: "Women's Watch",
+            description: "Timex Analog Rose Gold-Tone...",
+            price: 8995,
+            originalPrice: 10995,
+            discount: 18,
+            image: "https://www.titan.co.in/dw/image/v2/BKDD_PRD/on/demandware.static/-/Sites-titan-master-catalog/default/dw1facc89c/images/Titan/Catalog/90196AM01_2.jpg?sw=360&sh=360"
+        },
+    ];
 
-    const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
-    const [isWishlisted, setIsWishlisted] = React.useState(false);
-    const [isComparing, setIsComparing] = React.useState(false);
+    const [wishlist, setWishlist] = useState([]);
 
-    const handlePrevImage = () => {
-        setCurrentImageIndex(prev => (prev > 0 ? prev - 1 : product.images.length - 1));
-    };
-
-    const handleNextImage = () => {
-        setCurrentImageIndex(prev => (prev < product.images.length - 1 ? prev + 1 : 0));
+    const toggleWishlist = (productId) => {
+        if (wishlist.includes(productId)) {
+            setWishlist(wishlist.filter(id => id !== productId));
+        } else {
+            setWishlist([...wishlist, productId]);
+        }
     };
 
     const formatPrice = (price) => {
@@ -66,153 +112,78 @@ const Products = () => {
     };
 
     return (
-        <Grid item xs={6} sm={4} md={3} data-pid={product.id}>
-            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-                {/* Product Image with Navigation */}
-                <Box sx={{ position: 'relative' }}>
-                    <CardMedia
-                        component="img"
-                        image={product.images[currentImageIndex]}
-                        alt={product.name}
-                        sx={{ height: 220, objectFit: 'contain' }}
-                    />
+        <Container maxWidth="xl" sx={{ py: 4 }}>
+            <Typography variant="h4" component="h2" sx={{
+                textAlign: 'center',
+                mb: 4,
+                fontWeight: 'bold',
+                textTransform: 'uppercase'
+            }}>
+                All Products
+            </Typography>
 
-                    {/* Image Navigation Arrows */}
-                    <IconButton
-                        sx={{
-                            position: 'absolute',
-                            left: 0,
-                            top: '50%',
-                            transform: 'translateY(-50%)',
-                            backgroundColor: 'rgba(255,255,255,0.7)',
-                            '&:hover': { backgroundColor: 'rgba(255,255,255,0.9)' }
-                        }}
-                        onClick={handlePrevImage}
-                    >
-                        <ArrowBackIosIcon fontSize="small" />
-                    </IconButton>
-                    <IconButton
-                        sx={{
-                            position: 'absolute',
-                            right: 0,
-                            top: '50%',
-                            transform: 'translateY(-50%)',
-                            backgroundColor: 'rgba(255,255,255,0.7)',
-                            '&:hover': { backgroundColor: 'rgba(255,255,255,0.9)' }
-                        }}
-                        onClick={handleNextImage}
-                    >
-                        <ArrowForwardIosIcon fontSize="small" />
-                    </IconButton>
+            <Grid container spacing={4} style={{ justifyContent: 'center' }}>
+                {products.map((item) => (
+                    <Grid item xs={12} sm={6} md={4} key={item.id}  >
+                        <Card sx={{ width: 300, height: 320, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', borderRadius: 2, boxShadow: 3, position: 'relative', ":hover": { boxShadow: '2px 2px 15px rgb(179, 174, 174)' } }} >
+                            <div style={{ display: 'flex', justifyContent: 'end' }}>
+                                <IconButton
+                                    onClick={() => toggleWishlist(item.id)}
+                                // sx={{ position: 'absolute', top: 8, right: 8, zIndex: 1 }}
+                                >
+                                    {wishlist.includes(item.id) ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}
+                                </IconButton>
+                            </div>
 
-                    {/* Wishlist Button */}
-                    <Tooltip title={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}>
-                        <IconButton
-                            sx={{ position: 'absolute', top: 8, right: 8 }}
-                            onClick={() => setIsWishlisted(!isWishlisted)}
-                        >
-                            {isWishlisted ? (
-                                <FavoriteIcon color="error" />
-                            ) : (
-                                <FavoriteBorderIcon sx={{ color: 'white' }} />
+                            {/* Discount Badge */}
+                            {item.discount && (
+                                <Box sx={{
+                                    position: 'absolute',
+                                    top: 20,
+                                    left: 8,
+                                    backgroundColor: 'red',
+                                    color: 'white',
+                                    borderRadius: '4px',
+                                    px: 1,
+                                    fontSize: '12px',
+                                    fontWeight: 'bold'
+                                }}>
+                                    {item.discount}% OFF
+                                </Box>
                             )}
-                        </IconButton>
-                    </Tooltip>
 
-                    {/* Compare Checkbox */}
-                    <Box sx={{ position: 'absolute', bottom: 8, left: 8 }}>
-                        <Tooltip title="Compare">
-                            <Box sx={{ display: 'flex', alignItems: 'center', backgroundColor: 'rgba(255,255,255,0.8)', borderRadius: 1 }}>
-                                <Checkbox
-                                    icon={<CompareIcon />}
-                                    checkedIcon={<CompareIcon color="primary" />}
-                                    checked={isComparing}
-                                    onChange={() => setIsComparing(!isComparing)}
-                                    size="small"
+                            <Box sx={{ overflow: 'hidden', }}>
+                                <CardMedia
+                                    component="img"
+                                    height="190"
+                                    image={item.image}
+                                    alt={item.description}
+                                    sx={{ objectFit: 'cover', ":hover": { transform: 'scale(1.05)' } }}
                                 />
-                                <Typography variant="caption">Compare</Typography>
                             </Box>
-                        </Tooltip>
-                    </Box>
-                </Box>
 
-                {/* Product Details */}
-                <CardContent sx={{ flexGrow: 1 }}>
-                    {/* Rating and Variants */}
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                            <Rating value={product.rating} precision={0.5} size="small" readOnly />
-                            <Typography variant="caption" sx={{ ml: 0.5 }}>
-                                ({product.reviewCount})
-                            </Typography>
-                        </Box>
+                            <CardContent sx={{ textAlign: 'center', padding: 1 }}>
+                                <Typography variant="body1" fontWeight="bold" noWrap>
+                                    {item.description}
+                                </Typography>
 
-                        {product.variantCount > 0 && (
-                            <Tooltip title={`${product.variantCount} color variants available`}>
-                                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                    <Box sx={{
-                                        width: 16,
-                                        height: 16,
-                                        background: 'linear-gradient(45deg, #ff0000, #00ff00, #0000ff)',
-                                        borderRadius: '50%',
-                                        mr: 0.5
-                                    }} />
-                                    <Typography variant="caption">
-                                        +{product.variantCount} Colors
+                                {/* Prices */}
+                                <Box>
+                                    {item.originalPrice && (
+                                        <Typography variant="body2" color="text.secondary" sx={{ textDecoration: 'line-through' }}>
+                                            {formatPrice(item.originalPrice)}
+                                        </Typography>
+                                    )}
+                                    <Typography variant="body1" fontWeight="bold" color="primary">
+                                        {formatPrice(item.price)}
                                     </Typography>
                                 </Box>
-                            </Tooltip>
-                        )}
-                    </Box>
-
-                    {/* Brand and Category */}
-                    <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
-                        {product.brand} | {product.category}
-                    </Typography>
-
-                    {/* Product Name */}
-                    <Typography variant="subtitle1" component="h3" sx={{
-                        fontWeight: 'medium',
-                        mb: 1,
-                        display: '-webkit-box',
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: 'vertical',
-                        overflow: 'hidden'
-                    }}>
-                        {product.name}
-                    </Typography>
-
-                    {/* Price */}
-                    <Box sx={{ mb: 1 }}>
-                        <Typography variant="h6" component="span" sx={{ fontWeight: 'bold' }}>
-                            {formatPrice(product.price)}
-                        </Typography>
-                        <Typography
-                            variant="body2"
-                            component="span"
-                            sx={{
-                                textDecoration: 'line-through',
-                                color: 'text.secondary',
-                                ml: 1
-                            }}
-                        >
-                            {formatPrice(product.originalPrice)}
-                        </Typography>
-                        <Typography
-                            variant="body2"
-                            component="span"
-                            sx={{
-                                color: 'success.main',
-                                ml: 1,
-                                fontWeight: 'bold'
-                            }}
-                        >
-                            {product.discount}% off
-                        </Typography>
-                    </Box>
-                </CardContent>
-            </Card>
-        </Grid>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                ))}
+            </Grid>
+        </Container>
     );
 };
 

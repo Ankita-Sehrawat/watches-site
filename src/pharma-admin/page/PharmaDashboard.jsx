@@ -82,7 +82,7 @@ const PharmaDashboard = () => {
   );
 
   return (
-    <Container maxWidth="lg" sx={{ py: 5, backgroundColor: '#f9f9fb', borderRadius: 2 }}>
+    <Container maxWidth="xl" sx={{ py: 5, backgroundColor: '#f9f9fb', borderRadius: 2 }}>
       {loading ? (
         <CustomLoader />
       ) : (

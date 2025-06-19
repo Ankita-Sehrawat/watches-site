@@ -74,7 +74,7 @@
 //     };
 
 //     return (
-//         <Container maxWidth="lg" sx={{ mt: 5 }}>
+//         <Container maxWidth="xl" sx={{ mt: 5 }}>
 //             <Typography
 //                 variant="h4"
 //                 gutterBottom
@@ -280,7 +280,7 @@ const PharmaPrescription = () => {
     };
 
     return (
-        <Container maxWidth="lg" sx={{ mt: 5 }}>
+        <Container maxWidth="xl" sx={{ mt: 5 }}>
             <Typography
                 variant="h4"
                 gutterBottom

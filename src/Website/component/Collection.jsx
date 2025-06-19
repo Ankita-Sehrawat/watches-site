@@ -76,7 +76,6 @@ const Collection = () => {
                                     component="picture"
                                     sx={{
                                         display: 'block',
-                                        // justifyContent: 'center',
                                         width: '100%',
                                         height: 'auto',
                                         '& img': {

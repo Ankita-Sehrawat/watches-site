@@ -80,6 +80,7 @@ import { Route, Routes } from 'react-router-dom';
 import { CssBaseline } from '@mui/material';
 import Landing from './Website/page/landing';
 import Products from './Website/component/Products';
+import SingleProduct from './Website/component/SingleProduct';
 
 function App() {
   return (
@@ -88,8 +89,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Landing />} />
         <Route path='/products' element={<Products />} />
-        {/* <Route path='/products' element={<Products />} /> */}
-       <Route  />
+        <Route path='/singleProduct' element={<SingleProduct />} />
+        <Route />
       </Routes>
     </>
   );
