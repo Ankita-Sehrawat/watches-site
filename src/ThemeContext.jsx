@@ -60,12 +60,15 @@ export const ThemeSelector = () => {
   const { themeMode, toggleThemeMode } = useTheme();
 
   return (
-    <div className="theme-selector" style={{ position: 'fixed', top: 20, right: 50, zIndex: 1000 }}>
-      <Button 
-        onClick={toggleThemeMode} 
-        variant="contained" 
+    <div className="theme-selector"
+    // style={{ position: 'absolute', top: 10, right: '10%', zIndex: 1000 }}
+    >
+      <Button
+        onClick={toggleThemeMode}
+        // variant="contained"
         color="primary"
         aria-label="Toggle theme"
+        style={{ border: '1px solid #d88f5b', minWidth: '0' }}
       >
         {themeMode === 'light' ? '🌙' : '☀️'}
       </Button>

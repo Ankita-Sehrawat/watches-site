@@ -30,7 +30,7 @@ const HeroSection = () => {
       name: "Father's Day",
       desktopImage: "https://www.titan.co.in/dw/image/v2/BKDD_PRD/on/demandware.static/-/Library-Sites-TitanSharedLibrary/default/dweb8abaef/images/homepage/All_Banners/FathersDaySale_June2025_D.jpg",
       mobileImage: "https://www.titan.co.in/dw/image/v2/BKDD_PRD/on/demandware.static/-/Library-Sites-TitanSharedLibrary/default/dw0d22967c/images/homepage/All_Banners/FathersDaySale_June2025_M.jpg",
-      link: "https://www.titan.co.in/shop/men-watches-on-sale?lang=en_IN"
+      link: "/products"
     },
     // Add other items as needed
   ];
@@ -38,7 +38,7 @@ const HeroSection = () => {
   // Auto-rotate carousel
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveIndex((prevIndex) => 
+      setActiveIndex((prevIndex) =>
         prevIndex === carouselItems.length - 1 ? 0 : prevIndex + 1
       );
     }, 5000);
@@ -46,13 +46,13 @@ const HeroSection = () => {
   }, [carouselItems.length]);
 
   const handleNext = () => {
-    setActiveIndex((prevIndex) => 
+    setActiveIndex((prevIndex) =>
       prevIndex === carouselItems.length - 1 ? 0 : prevIndex + 1
     );
   };
 
   const handleBack = () => {
-    setActiveIndex((prevIndex) => 
+    setActiveIndex((prevIndex) =>
       prevIndex === 0 ? carouselItems.length - 1 : prevIndex - 1
     );
   };
@@ -75,8 +75,8 @@ const HeroSection = () => {
   }));
 
   return (
-    <Box sx={{ 
-      position: 'relative', 
+    <Box sx={{
+      position: 'relative',
       width: '100%',
       height: isMobile ? '400px' : '600px',
       overflow: 'hidden'
@@ -90,7 +90,7 @@ const HeroSection = () => {
         transform: `translateX(-${activeIndex * 100}%)`
       }}>
         {carouselItems.map((item, index) => (
-          <Box 
+          <Box
             key={index}
             sx={{
               minWidth: '100%',
@@ -111,7 +111,7 @@ const HeroSection = () => {
                 }}
               />
             </a>
-            
+
             {/* Navigation Buttons */}
             {!isMobile && (
               <>

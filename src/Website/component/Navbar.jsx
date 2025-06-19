@@ -263,6 +263,8 @@ const Navbar = () => {
                 </Badge>
               </IconButton>
 
+              <ThemeSelector/>
+
               {/* Mobile Search Toggle */}
               <IconButton
                 size="large"
@@ -273,7 +275,6 @@ const Navbar = () => {
               >
                 <SearchIcon />
               </IconButton>
-              <ThemeSelector />
             </Box>
           </Toolbar>
 
