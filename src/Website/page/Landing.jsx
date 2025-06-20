@@ -13,7 +13,6 @@ import Footer from '../component/Footer';
 const Landing = () => {
     return (
         <div>
-            <Navbar />
             <HeroSection/>
             <Category/>
             <NewArrival/>

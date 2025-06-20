@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, Typography, Card, CardMedia, CardContent, Button, Box, Divider, IconButton, Container } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Link } from 'react-router-dom';
 
 const Wishlist = () => {
     const items = [
@@ -49,7 +50,7 @@ const Wishlist = () => {
                             position: 'relative'
                         }}>
                             <Box sx={{ position: 'absolute', right: 8, top: 8, zIndex: 1 }}>
-                                <IconButton aria-label="delete" size="small" sx={{ backgroundColor: 'white', boxShadow: '0 1px 2px 0 rgba(0,0,0,.2)' }}>
+                                <IconButton aria-label="delete" size="small" sx={{ color:'red' }}>
                                     <DeleteIcon fontSize="small" />
                                 </IconButton>
                             </Box>
@@ -57,12 +58,12 @@ const Wishlist = () => {
                             <CardMedia
                                 component="img"
                                 alt={item.title}
-                                height="200"
+                                height="250"
                                 image={item.imgSrc}
                                 title={item.title}
                                 sx={{
                                     objectFit: 'contain',
-                                    p: 2,
+                                    p: 1,
                                     backgroundColor: '#f5f5f5'
                                 }}
                             />
@@ -130,29 +131,32 @@ const Wishlist = () => {
                                         View Product
                                     </Button>
                                     {!item.availability && (
-                                        <Button
-                                            variant="contained"
-                                            size="small"
-                                            startIcon={<ShoppingCartIcon />}
-                                            sx={{
-                                                textTransform: 'none',
-                                                borderRadius: '2px',
-                                                backgroundColor: '#fb641b',
-                                                '&:hover': {
-                                                    backgroundColor: '#e05a14'
-                                                }
-                                            }}
-                                        >
-                                            Add to Cart
-                                        </Button>
+                                        <Link to='/cart'>
+                                            <Button
+                                                variant="contained"
+                                                size="small"
+                                                startIcon={<ShoppingCartIcon />}
+                                                sx={{
+                                                    textTransform: 'none',
+                                                    borderRadius: '2px',
+                                                    backgroundColor: '#fb641b',
+                                                    '&:hover': {
+                                                        backgroundColor: '#e05a14'
+                                                    }
+                                                }}
+                                            >
+                                                Add to Cart
+                                            </Button>
+                                        </Link>
                                     )}
                                 </Box>
                             </Box>
                         </Card>
                     </Box>
-                ))}
-            </Box>
-        </Container>
+                ))
+                }
+            </Box >
+        </Container >
     );
 };
 

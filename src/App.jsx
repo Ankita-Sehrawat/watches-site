@@ -84,11 +84,13 @@ import SingleProduct from './Website/component/SingleProduct';
 import Cart from './Website/component/Cart';
 import Checkout from './Website/component/Checkout';
 import Wishlist from './Website/component/Wishlist';
+import Navbar from './Website/component/Navbar';
 
 function App() {
   return (
     <>
       <CssBaseline />
+      <Navbar />
       <Routes>
         <Route path='/' element={<Landing />} />
         <Route path='/products' element={<Products />} />

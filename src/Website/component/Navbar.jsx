@@ -103,6 +103,12 @@ const Navbar = () => {
       [categoryName]: !prev[categoryName] // Toggle the clicked category
     }));
   };
+  const gotoCart = () => {
+    window.location.href = "/cart"
+  }
+  const gotoWishlist = () => {
+    window.location.href = "/wishlist"
+  }
 
   const { themeMode } = useTheme();
 
@@ -220,19 +226,19 @@ const Navbar = () => {
                     </Button>
 
                     <List>
-                      <ListItem button>
-                        <ListItemText primary="Wishlist" />
+                      <ListItem sx={{ cursor: 'pointer' }} button>
+                        <ListItemText onClick={gotoWishlist} primary="Wishlist" />
                       </ListItem>
-                      <ListItem button>
+                      <ListItem sx={{ cursor: 'pointer' }} button>
                         <ListItemText primary="eGift Cards" />
                       </ListItem>
-                      <ListItem button>
+                      <ListItem sx={{ cursor: 'pointer' }} button>
                         <ListItemText primary="Find A Store" />
                       </ListItem>
-                      <ListItem button>
+                      <ListItem sx={{ cursor: 'pointer' }} button>
                         <ListItemText primary="Help & Contact" />
                       </ListItem>
-                      <ListItem button>
+                      <ListItem sx={{ cursor: 'pointer' }} button>
                         <ListItemText primary="FAQ" />
                       </ListItem>
                     </List>
@@ -245,6 +251,7 @@ const Navbar = () => {
                 size="large"
                 aria-label="wishlist"
                 color="inherit"
+                onClick={gotoWishlist}
                 sx={{ display: { xs: 'none', md: 'flex' } }}
               >
                 <Badge badgeContent={0} color="error">
@@ -257,13 +264,14 @@ const Navbar = () => {
                 size="large"
                 aria-label="cart"
                 color="inherit"
+                onClick={gotoCart}
               >
                 <Badge badgeContent={0} color="error">
                   <CartIcon />
                 </Badge>
               </IconButton>
 
-              <ThemeSelector/>
+              <ThemeSelector />
 
               {/* Mobile Search Toggle */}
               <IconButton
