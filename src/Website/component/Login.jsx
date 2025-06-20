@@ -272,7 +272,7 @@ const Login = () => {
         </Link>
       </Box>
     </Box>
-  );
+  ); 
 };
 
 export default Login;
