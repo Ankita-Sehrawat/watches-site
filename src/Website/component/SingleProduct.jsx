@@ -26,7 +26,9 @@ import {
     Tabs,
     Tab,
     Rating,
-    Container
+    Container,
+    useMediaQuery,
+    useTheme
 } from '@mui/material';
 import {
     ExpandMore as ExpandMoreIcon,
@@ -46,6 +48,7 @@ import {
     Email
 } from '@mui/icons-material';
 
+
 const SingleProduct = () => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [expanded, setExpanded] = useState('specs');
@@ -56,6 +59,8 @@ const SingleProduct = () => {
     const [shareOpen, setShareOpen] = useState(false);
     const [similarOpen, setSimilarOpen] = useState(false);
     const [tabValue, setTabValue] = useState(0);
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
     const product = {
         id: 'plpewjl0072203',
@@ -168,18 +173,31 @@ const SingleProduct = () => {
     return (
         <Container maxWidth="xl" sx={{ py: 4 }}>
 
-            <Grid container spacing={4}>
+            <Box sx={{
+                display: 'flex',
+                // p: 2,
+                gap: 4,
+                width: '100%',
+                // alignItems: 'flex-start',
+                justifyContent: 'center',
+                flexDirection: isMobile ? 'column' : 'row',
+            }}>
                 {/* Product Images */}
-                <Grid item xs={12} md={5}>
-                    <Box sx={{ position: 'relative', width: '100%' }}>
+                <Box >
+                    <Box sx={{
+                        width: '100%',
+                        position: 'relative'
+                    }}>
                         {/* Main Image */}
                         <Box sx={{
                             width: '100%',
-                            height: { xs: '300px', md: '500px' },
+                            height: isMobile ? '300px' : '400px',
                             display: 'flex',
                             justifyContent: 'center',
                             alignItems: 'center',
-                            mb: 2
+                            mb: 2,
+                            backgroundColor: '#f5f5f5',
+                            borderRadius: 1
                         }}>
                             <Box
                                 component="img"
@@ -250,16 +268,14 @@ const SingleProduct = () => {
                             ))}
                         </Box>
                     </Box>
-                </Grid>
-
+                </Box>
 
                 {/* Product Details */}
-                <Grid item xs={12} md={7} sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    width: '58%',
-                    height: 600,
-                    overflow: 'auto',
+                <Box sx={{
+                    width: isMobile ? '100%' : '60%',
+                    height: isMobile ? 'auto' : 'calc(100vh - 150px)',
+                    overflowY: 'auto',
+                    pr: 1,
                     '&::-webkit-scrollbar': {
                         width: '8px',
                     },
@@ -272,7 +288,7 @@ const SingleProduct = () => {
                         borderRadius: '10px',
                     }
                 }
-                } >
+                }  >
                     {/* Brand and Tag */}
                     < Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
                         <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -294,14 +310,6 @@ const SingleProduct = () => {
                         variant="h4"
                         component="h1"
                         gutterBottom
-                    // sx={{
-                    //     wordWrap: 'break-word',
-                    //     overflow: 'hidden',
-                    //     textOverflow: 'ellipsis',
-                    //     display: '-webkit-box',
-                    //     WebkitLineClamp: 2,
-                    //     WebkitBoxOrient: 'vertical',
-                    // }}
                     >
                         {product.name}
                     </Typography>
@@ -322,7 +330,7 @@ const SingleProduct = () => {
                     </Box>
 
                     {/* Action Buttons */}
-                    <Box sx={{ display: 'flex', gap: 2, mb: 3 }}>
+                    <Box sx={{ display: 'flex', gap: 2, mb: 3, flexDirection: isMobile ? 'column' : 'row' }}>
                         <Button
                             variant="contained"
                             color="primary"
@@ -472,8 +480,8 @@ const SingleProduct = () => {
                         )}
                     </Box>
 
-                </Grid>
-            </Grid>
+                </Box>
+            </Box>
 
             {/* Share Dialog */}
             <Dialog open={shareOpen} onClose={() => setShareOpen(false)}>

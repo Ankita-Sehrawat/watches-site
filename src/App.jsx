@@ -92,8 +92,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Landing />} />
         <Route path='/products' element={<Products />} />
-        {/* <Route path='/products/single_product' element={<SingleProduct />} /> */}
-        <Route path='/single_product' element={<SingleProduct />} />
+        {/* <Route path='/single_product' element={<SingleProduct />} /> */}
+        <Route path='/products/single_product' element={<SingleProduct />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/checkout' element={<Checkout />} />
         <Route path='/wishlist' element={<Wishlist />} />
