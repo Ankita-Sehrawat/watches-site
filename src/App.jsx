@@ -80,7 +80,7 @@ import { Route, Routes } from 'react-router-dom';
 import { CssBaseline } from '@mui/material';
 import Landing from './Website/page/landing';
 import Products from './Website/component/Products';
-import SingleProduct from './Website/component/SingleProduct';
+import SingleProduct from './Website/page/SingleProduct';
 import Cart from './Website/page/Cart';
 import Checkout from './Website/page/Checkout';
 import Wishlist from './Website/page/Wishlist';
