@@ -14,13 +14,18 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
-  const [loginMethod, setLoginMethod] = useState('email'); // 'email' or 'phone'
+  const [loginMethod, setLoginMethod] = useState('email');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     password: ''
   });
+  const [phoneError, setPhoneError] = useState(false);
+
+  const validatePhone = (phone) => {
+    return /^\d{10}$/.test(phone);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,8 +35,21 @@ const Login = () => {
     }));
   };
 
+  const handlePhoneChange = (e) => {
+    handleChange(e);
+    setPhoneError(!validatePhone(e.target.value));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Validate phone if using phone login or in signup
+    if ((isLogin && loginMethod === 'phone') || !isLogin) {
+      const isPhoneValid = validatePhone(formData.phone);
+      setPhoneError(!isPhoneValid);
+      if (!isPhoneValid) return;
+    }
+
     if (isLogin) {
       console.log('Login submitted:', loginMethod === 'email' ?
         { email: formData.email, password: formData.password } :
@@ -67,86 +85,16 @@ const Login = () => {
       </Typography>
 
       {!isLogin && (
-        <TextField
-          fullWidth
-          label="Full Name"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          margin="normal"
-          required
-        />
-      )}
-
-      {isLogin && (
-        <Box sx={{ mb: 2 }}>
-          <Button
-            variant={loginMethod === 'email' ? 'contained' : 'outlined'}
-            onClick={() => setLoginMethod('email')}
-            sx={{ mr: 1 }}
-          >
-            Email
-          </Button>
-          <Button
-            variant={loginMethod === 'phone' ? 'contained' : 'outlined'}
-            onClick={() => setLoginMethod('phone')}
-          >
-            Phone
-          </Button>
-        </Box>
-      )}
-
-      {isLogin && loginMethod === 'email' ? (
-        <TextField
-          fullWidth
-          type="email"
-          label="Email Address"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          margin="normal"
-          required
-        />
-      ) : (
-        <TextField
-          fullWidth
-          type="tel"
-          label="Phone Number"
-          name="phone"
-          value={formData.phone}
-          onChange={handleChange}
-          margin="normal"
-          required
-        />
-      )}
-
-      {isLogin && loginMethod === 'email' && (
-        <TextField
-          fullWidth
-          type={showPassword ? 'text' : 'password'}
-          label="Password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          margin="normal"
-          required
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  onClick={() => setShowPassword(!showPassword)}
-                  edge="end"
-                >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            )
-          }}
-        />
-      )}
-
-      {!isLogin && (
         <>
+          <TextField
+            fullWidth
+            label="Full Name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            margin="normal"
+            required
+          />
           <TextField
             fullWidth
             type="email"
@@ -156,6 +104,22 @@ const Login = () => {
             onChange={handleChange}
             margin="normal"
             required
+          />
+          <TextField
+            fullWidth
+            type="tel"
+            label="Phone Number"
+            name="phone"
+            value={formData.phone}
+            onChange={handlePhoneChange}
+            margin="normal"
+            required
+            error={phoneError}
+            helperText={phoneError ? "Phone number must be 10 digits" : ""}
+            inputProps={{
+              maxLength: 10,
+              pattern: "\\d{10}"
+            }}
           />
           <TextField
             fullWidth
@@ -179,6 +143,80 @@ const Login = () => {
               )
             }}
           />
+        </>
+      )}
+
+      {isLogin && (
+        <>
+          <Box sx={{ mb: 2 }}>
+            <Button
+              variant={loginMethod === 'email' ? 'contained' : 'outlined'}
+              onClick={() => setLoginMethod('email')}
+              sx={{ mr: 1 }}
+            >
+              Email
+            </Button>
+            <Button
+              variant={loginMethod === 'phone' ? 'contained' : 'outlined'}
+              onClick={() => setLoginMethod('phone')}
+            >
+              Phone
+            </Button>
+          </Box>
+
+          {loginMethod === 'email' ? (
+            <>
+              <TextField
+                fullWidth
+                type="email"
+                label="Email Address"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                margin="normal"
+                required
+              />
+              <TextField
+                fullWidth
+                type={showPassword ? 'text' : 'password'}
+                label="Password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                margin="normal"
+                required
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() => setShowPassword(!showPassword)}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }}
+              />
+            </>
+          ) : (
+            <TextField
+              fullWidth
+              type="tel"
+              label="Phone Number"
+              name="phone"
+              value={formData.phone}
+              onChange={handlePhoneChange}
+              margin="normal"
+              required
+              error={phoneError}
+              helperText={phoneError ? "Phone number must be 10 digits" : ""}
+              inputProps={{
+                maxLength: 10,
+                pattern: "\\d{10}"
+              }}
+            />
+          )}
         </>
       )}
 
@@ -227,6 +265,7 @@ const Login = () => {
               phone: '',
               password: ''
             });
+            setPhoneError(false);
           }}
         >
           {isLogin ? 'Create An Account' : 'Login Instead'}
