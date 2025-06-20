@@ -43,6 +43,7 @@ import {
   Diamond
 } from '@mui/icons-material';
 import { ThemeSelector, useTheme } from '../../ThemeContext';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -213,17 +214,19 @@ const Navbar = () => {
                     <Typography variant="body2" sx={{ mb: 2 }}>
                       Enjoy A Personalized Timekeeping Experience.
                     </Typography>
-                    <Button
-                      variant="contained"
-                      fullWidth
-                      sx={{
-                        bgcolor: '#832729',
-                        '&:hover': { bgcolor: '#6a1f21' },
-                        mb: 2
-                      }}
-                    >
-                      LOGIN/SIGNUP
-                    </Button>
+                    <Link to='/login'>
+                      <Button
+                        variant="contained"
+                        fullWidth
+                        sx={{
+                          bgcolor: '#832729',
+                          '&:hover': { bgcolor: '#6a1f21' },
+                          mb: 2
+                        }}
+                      >
+                        LOGIN/SIGNUP
+                      </Button>
+                    </Link>
 
                     <List>
                       <ListItem sx={{ cursor: 'pointer' }} button>

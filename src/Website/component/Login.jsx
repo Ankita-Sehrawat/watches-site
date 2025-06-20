@@ -1,34 +1,195 @@
-import React from 'react';
-import { Box, Button, Typography, Link } from '@mui/material';
+import React, { useState } from 'react';
+import {
+  Box,
+  Button,
+  Typography,
+  Link,
+  TextField,
+  Divider,
+  InputAdornment,
+  IconButton
+} from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const Login = () => {
+  const [isLogin, setIsLogin] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
+  const [loginMethod, setLoginMethod] = useState('email'); // 'email' or 'phone'
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    password: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isLogin) {
+      console.log('Login submitted:', loginMethod === 'email' ?
+        { email: formData.email, password: formData.password } :
+        { phone: formData.phone });
+    } else {
+      console.log('Signup submitted:', formData);
+    }
+  };
+
   return (
-    <Box 
-      sx={{ 
-        backgroundColor: '#dda2430d', 
-        textAlign: 'center', 
+    <Box
+      sx={{
+        backgroundColor: '#dda2430d',
+        textAlign: 'center',
         padding: 3,
         marginTop: 3,
-        borderRadius: 1
+        borderRadius: 1,
+        maxWidth: 500,
+        mx: 'auto'
       }}
+      component="form"
+      onSubmit={handleSubmit}
     >
-      <Typography 
-        variant="h5" 
+      <Typography
+        variant="h5"
         component="h2"
-        sx={{ 
+        sx={{
           fontWeight: 'bold',
           marginBottom: 3
         }}
       >
-        LOGIN FOR THE BEST EXPERIENCE
+        {isLogin ? 'LOGIN FOR THE BEST EXPERIENCE' : 'CREATE AN ACCOUNT'}
       </Typography>
-      
+
+      {!isLogin && (
+        <TextField
+          fullWidth
+          label="Full Name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          margin="normal"
+          required
+        />
+      )}
+
+      {isLogin && (
+        <Box sx={{ mb: 2 }}>
+          <Button
+            variant={loginMethod === 'email' ? 'contained' : 'outlined'}
+            onClick={() => setLoginMethod('email')}
+            sx={{ mr: 1 }}
+          >
+            Email
+          </Button>
+          <Button
+            variant={loginMethod === 'phone' ? 'contained' : 'outlined'}
+            onClick={() => setLoginMethod('phone')}
+          >
+            Phone
+          </Button>
+        </Box>
+      )}
+
+      {isLogin && loginMethod === 'email' ? (
+        <TextField
+          fullWidth
+          type="email"
+          label="Email Address"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          margin="normal"
+          required
+        />
+      ) : (
+        <TextField
+          fullWidth
+          type="tel"
+          label="Phone Number"
+          name="phone"
+          value={formData.phone}
+          onChange={handleChange}
+          margin="normal"
+          required
+        />
+      )}
+
+      {isLogin && loginMethod === 'email' && (
+        <TextField
+          fullWidth
+          type={showPassword ? 'text' : 'password'}
+          label="Password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          margin="normal"
+          required
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  onClick={() => setShowPassword(!showPassword)}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            )
+          }}
+        />
+      )}
+
+      {!isLogin && (
+        <>
+          <TextField
+            fullWidth
+            type="email"
+            label="Email Address"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            margin="normal"
+            required
+          />
+          <TextField
+            fullWidth
+            type={showPassword ? 'text' : 'password'}
+            label="Password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            margin="normal"
+            required
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={() => setShowPassword(!showPassword)}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              )
+            }}
+          />
+        </>
+      )}
+
       <Button
+        type="submit"
         variant="contained"
         size="large"
+        fullWidth
         sx={{
-          marginBottom: 3,
-          padding: '8px 24px',
+          margin: '24px 0',
+          padding: '10px',
           textTransform: 'none',
           fontSize: '1rem',
           fontWeight: 'bold',
@@ -37,17 +198,19 @@ const Login = () => {
             backgroundColor: 'primary.dark'
           }
         }}
-        onClick={() => {
-          // Handle login modal open
-          console.log('Login clicked');
-        }}
       >
-        Login Now
+        {isLogin ? 'Login Now' : 'Sign Up'}
       </Button>
-      
+
+      <Divider sx={{ my: 2 }} />
+
       <Box sx={{ textAlign: 'center' }}>
+        <Typography variant="body2" sx={{ display: 'inline', mr: 1 }}>
+          {isLogin ? "Don't have an account?" : "Already have an account?"}
+        </Typography>
         <Link
-          href="#"
+          component="button"
+          type="button"
           sx={{
             cursor: 'pointer',
             color: 'text.primary',
@@ -57,11 +220,16 @@ const Login = () => {
             }
           }}
           onClick={() => {
-            // Handle signup modal open
-            console.log('Signup clicked');
+            setIsLogin(!isLogin);
+            setFormData({
+              name: '',
+              email: '',
+              phone: '',
+              password: ''
+            });
           }}
         >
-          Create An Account
+          {isLogin ? 'Create An Account' : 'Login Instead'}
         </Link>
       </Box>
     </Box>
