@@ -26,7 +26,9 @@ import {
     AccordionDetails,
     Badge,
     Tabs,
-    Tab
+    Tab,
+    useTheme,
+    useMediaQuery
 } from '@mui/material';
 import {
     FavoriteBorder,
@@ -81,6 +83,9 @@ const Cart = () => {
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
     const [openOfferDialog, setOpenOfferDialog] = useState(false);
     const [currentOffer, setCurrentOffer] = useState(null);
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+    const isSmlMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     const handleSelectItem = (itemId) => {
         if (selectedItems.includes(itemId)) {
@@ -121,30 +126,34 @@ const Cart = () => {
         <Container maxWidth="xl" sx={{ py: 4 }}>
             <Box sx={{
                 display: 'flex',
-                p: 2,
                 gap: 2,
                 width: '100%',
-                alignItems: 'flex-start'
+                alignItems: 'flex-start',
+                justifyContent: 'center',
+                flexDirection: isMobile ? 'column' : 'row',
             }}>
                 {/* Left Column - Cart Items */}
                 <Box sx={{
-                    flex: 2,
-                    minWidth: 0
+                    width: isMobile ? '100%' : '63%',
                 }}>
                     {/* Cart Header */}
                     <Paper sx={{ p: 2, mb: 3 }}>
-                        <Box display="flex" justifyContent="space-between" alignItems="center">
-                            <Box display="flex" alignItems="center">
-                                <Checkbox
-                                    checked={selectedItems.length === cartItems.length}
-                                    onChange={handleSelectAll}
-                                />
+                        <Box display="flex" justifyContent="space-between" alignItems="center" sx={{ flexDirection: isSmlMobile ? 'column' : 'row', alignItems: isSmlMobile ? 'start' : 'center', gap: isSmlMobile ? '3' : '0' }}>
+                            <Box display="flex" alignItems='center' >
+                                <div>
+                                    <Checkbox
+                                        checked={selectedItems.length === cartItems.length}
+                                        onChange={handleSelectAll}
+                                    />
+                                </div>
+
                                 <Typography variant="body1">
                                     {selectedItems.length}/{cartItems.length} Item selected
                                 </Typography>
                                 <Typography variant="body1" sx={{ ml: 1, fontWeight: 'bold' }}>
                                     ({formatPrice(selectedItems.length * cartItems[0].price)})
                                 </Typography>
+
                             </Box>
                             <Box>
                                 <Button startIcon={<FavoriteBorder />} sx={{ mr: 2 }}>
@@ -166,12 +175,13 @@ const Cart = () => {
                                 gap: 2,
                                 width: '100%',
                                 alignItems: 'flex-start'
+
                             }}>
                                 {/* Image Section - Fixed width */}
                                 <Box sx={{
                                     position: 'relative',
                                     flexShrink: 0,
-                                    width: { xs: '30%', sm: '25%' },
+                                    width: { xs: '40%', sm: '25%' },
                                 }}>
                                     <Checkbox
                                         checked={selectedItems.includes(item.id)}
@@ -207,7 +217,7 @@ const Cart = () => {
                                     <Typography variant="body2" color="text.secondary" noWrap>
                                         {item.brand}
                                     </Typography>
-                                    <Typography variant="h6" sx={{ mb: 1 }} >
+                                    <Typography variant="h6" sx={{ mb: 1, fontSize: isSmlMobile ? 18 : 22 }} >
                                         {item.name}
                                     </Typography>
 
@@ -295,11 +305,11 @@ const Cart = () => {
 
                 {/* Right Column - Order Summary */}
                 <Box sx={{
-                    flex: 1,
-                    position: { md: 'sticky' },
-                    top: { md: 20 },
-                    width: '100%',
-                    minWidth: 0
+                    // flex: 1,
+                    // position: { md: 'sticky' },
+                    // top: { md: 20 },
+                    width: isMobile ? '100%' : '35%',
+                    // minWidth: 0
                 }}>
                     {/* Delivery Check */}
                     <Paper sx={{ p: 2, mb: 3 }}>
