@@ -31,7 +31,7 @@ import {
     Clear,
     ArrowDropDown
 } from '@mui/icons-material';
-import Navbar from './Navbar';
+import Navbar from '../component/Navbar';
 
 const Checkout = () => {
     const [salutation, setSalutation] = useState('Mr');

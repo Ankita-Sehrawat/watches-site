@@ -81,10 +81,11 @@ import { CssBaseline } from '@mui/material';
 import Landing from './Website/page/landing';
 import Products from './Website/component/Products';
 import SingleProduct from './Website/component/SingleProduct';
-import Cart from './Website/component/Cart';
-import Checkout from './Website/component/Checkout';
-import Wishlist from './Website/component/Wishlist';
+import Cart from './Website/page/Cart';
+import Checkout from './Website/page/Checkout';
+import Wishlist from './Website/page/Wishlist';
 import Navbar from './Website/component/Navbar';
+import Login from './Website/component/Login';
 
 function App() {
   return (
@@ -93,6 +94,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path='/' element={<Landing />} />
+        <Route path='/login' element={<Login />} />
         <Route path='/products' element={<Products />} />
         {/* <Route path='/single_product' element={<SingleProduct />} /> */}
         <Route path='/products/single_product' element={<SingleProduct />} />
