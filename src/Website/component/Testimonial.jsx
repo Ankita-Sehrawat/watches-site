@@ -3,6 +3,7 @@ import { Box, Typography, Grid, useTheme, useMediaQuery } from '@mui/material';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import QuoteIcon from '@mui/icons-material/FormatQuote';
+import { ArrowBackIosNewRounded, ArrowForwardIosRounded } from '@mui/icons-material';
 
 const testimonials = [
   {
@@ -94,11 +95,12 @@ const Testimonial = () => {
                 display: hasPrev ? 'block' : 'none'
               }}
             >
-              <img 
+              {/* <img 
                 src="/path-to-your-prev-arrow.svg" 
                 alt="Previous" 
                 style={{ width: '40px', height: '40px' }}
-              />
+              /> */}
+              <ArrowBackIosNewRounded />
             </Box>
           )}
           renderArrowNext={(onClickHandler, hasNext, label) => (
@@ -114,11 +116,13 @@ const Testimonial = () => {
                 display: hasNext ? 'block' : 'none'
               }}
             >
-              <img 
+              {/* <img 
                 src="/path-to-your-next-arrow.svg" 
                 alt="Next" 
                 style={{ width: '40px', height: '40px' }}
-              />
+              /> */}
+              <ArrowForwardIosRounded />
+
             </Box>
           )}
           renderIndicator={(onClickHandler, isSelected, index, label) => (

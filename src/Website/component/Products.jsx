@@ -101,9 +101,9 @@ const Products = () => {
     ];
 
     const [wishlist, setWishlist] = useState([]);
-    const [value, setValue] = React.useState([449, 550000]);
-    const [minInput, setMinInput] = React.useState("449");
-    const [maxInput, setMaxInput] = React.useState("550,000");
+    const [value, setValue] = useState([449, 550000]);
+    const [minInput, setMinInput] = useState("449");
+    const [maxInput, setMaxInput] = useState("550,000");
 
     const handleSliderChange = (event, newValue) => {
         setValue(newValue);

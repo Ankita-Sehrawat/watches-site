@@ -17,7 +17,6 @@ const Landing = () => {
             <Category/>
             <NewArrival/>
             <Collection/>
-            <Login/>
             <Testimonial/>
             <Footer/>
             {/* <Trial />

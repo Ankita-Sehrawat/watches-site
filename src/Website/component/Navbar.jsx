@@ -136,7 +136,7 @@ const Navbar = () => {
                 <img
                   src="https://www.titan.co.in/on/demandware.static/-/Library-Sites-TitanSharedLibrary/default/dwb6d5816b/images/homepage/titan-logo.svg"
                   alt="Titan Logo"
-                  height="40"
+                  // height="40"
                 />
               </Box>
             </Box>
