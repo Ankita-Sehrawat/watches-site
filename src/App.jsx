@@ -78,7 +78,6 @@
 
 import { Route, Routes } from 'react-router-dom';
 import { CssBaseline } from '@mui/material';
-import Landing from './Website/page/landing';
 import Products from './Website/component/Products';
 import SingleProduct from './Website/page/SingleProduct';
 import Cart from './Website/page/Cart';
@@ -86,6 +85,7 @@ import Checkout from './Website/page/Checkout';
 import Wishlist from './Website/page/Wishlist';
 import Navbar from './Website/component/Navbar';
 import Login from './Website/component/Login';
+import LandingPage from './Website/page/LandingPage';
 
 function App() {
   return (
@@ -93,7 +93,7 @@ function App() {
       <CssBaseline />
       <Navbar />
       <Routes>
-        <Route path='/' element={<Landing />} />
+        <Route path='/' element={<LandingPage />} />
         <Route path='/login' element={<Login />} />
         <Route path='/products' element={<Products />} />
         {/* <Route path='/single_product' element={<SingleProduct />} /> */}

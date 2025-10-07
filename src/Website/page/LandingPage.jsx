@@ -10,7 +10,7 @@ import Login from '../component/Login';
 import Testimonial from '../component/Testimonial';
 import Footer from '../component/Footer';
 
-const Landing = () => {
+const LandingPage = () => {
     return (
         <div>
             <HeroSection/>
@@ -25,4 +25,4 @@ const Landing = () => {
     );
 };
 
-export default Landing;
+export default LandingPage;
